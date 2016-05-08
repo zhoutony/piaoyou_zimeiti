@@ -1,0 +1,23 @@
+.container {
+  position: relative;
+}
+
+.dots {
+  position: absolute;
+  bottom: .5rem;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.dot {
+  width: .5rem;
+  height: .5rem;
+  border: .1rem solid #00948D;
+  margin: 0 .1rem;
+  border-radius: 1rem;
+}
+
+.current {
+  background: #00948D;
+}

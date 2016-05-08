@@ -1,0 +1,56 @@
+.container {
+  background: #F6F6F6;
+}
+
+.image {
+  position: relative;
+  float: left;
+}
+
+.image img {
+  width: 100%;
+}
+
+.title {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: #000;
+  text-align: center;
+  line-height: 1.5;
+  background: rgba(255, 255, 255, .3);
+}
+
+.movie {
+  position: relative;
+  float: left;
+  display: flex;
+  padding: 1.25rem 1.8rem;
+}
+
+.cover {
+  width: 6rem;
+}
+
+.cover img {
+  width: 100%;
+}
+
+.movie ul {
+  flex: 1 0;
+  padding: 0 .83rem;
+  color: #888;
+}
+
+.buy {
+  width: 4rem;
+  height: 5.5rem;
+  background: url(./buy_icon.png);
+  background-size: 100%;
+  color: #fff;
+  text-align: center;
+  padding-top: 3.7rem;
+  align-self: flex-end;
+  margin-bottom: 1rem;
+}

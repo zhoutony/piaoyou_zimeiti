@@ -1,0 +1,21 @@
+.normal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5.17rem;
+  height: 5.17rem;
+  margin-top: -2.58rem;
+  margin-left: -2.58rem;
+  background: url(./icon.png) rgba(0, 0, 0, .5) no-repeat;
+  background-size: 100%;
+  border: 1px solid white;
+  border-radius: 100%;
+}
+
+.small {
+  border-color: rgba(255, 255, 255, .5);
+  width: 2rem;
+  height: 2rem;
+  margin-top: -1rem;
+  margin-left: -1rem;
+}

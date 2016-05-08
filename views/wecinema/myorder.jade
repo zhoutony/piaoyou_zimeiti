@@ -1,0 +1,32 @@
+extends ./layout
+
+block title
+        title 电影票友
+
+
+
+block prepend body
+    include ./pagelets/loading
+    
+    //wrap
+    div.wrap
+        div.addcard
+            a.flexbox
+                div.flex.main 抵用券
+                div.aside 添加
+
+        div.orderbox
+            dd 
+                include myorderlist
+         
+
+
+
+
+block prepend footer
+
+block prepend script
+    script
+        
+
+

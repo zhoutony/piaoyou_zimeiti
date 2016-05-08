@@ -1,0 +1,10 @@
+div.cardpop 
+    ul.cardlist
+        if data && !data.err && data.piaoyouCards
+            each card, index in data.piaoyouCards
+                li
+                    div.cardtxt
+                        b 金额：
+                        span ￥#{card.remainder}
+                    p 票友卡：#{card.denomination}元
+                    p 有效期：#{card.startTime}至#{card.endTime}

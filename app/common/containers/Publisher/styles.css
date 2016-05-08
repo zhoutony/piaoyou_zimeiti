@@ -1,0 +1,59 @@
+.header {
+  height: 14.25rem;
+  background-size: 100% 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+  padding: 1.17rem 2.5rem 0;
+}
+
+.logo {
+  display: inline-block;
+  width: 4.66rem;
+  height: 4.66rem;
+  border: .17rem solid #c8c8c8;
+  border-radius: 100%;
+  background-size: 100%;
+  position: relative;
+}
+
+.logo::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 1rem;
+  height: 1rem;
+  background: url(./images/v_icon.png);
+  background-size: 100%;
+}
+
+.header h2 {
+  font-size: 1.17rem;
+  font-weight: normal;
+}
+
+.header .unSubscribe,
+.header .subscribe {
+  padding: .1rem 1rem;
+  color: #fff;
+  background: #00948D;
+}
+
+.unSubscribe::before {
+  content: '已订阅';
+}
+
+.subscribe::before {
+  content: '+ 订阅';
+}
+
+.header .unSubscribe,
+.header .subscribe,
+.header h2,
+.info,
+.intro {
+  font-weight: 400;
+  margin-top: .3rem;
+}

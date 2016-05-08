@@ -1,0 +1,73 @@
+extends ./layout
+
+block title
+  title 电影票友
+
+block prepend body
+
+  //wrap
+  div.wrap
+    if data && !data.err
+      if data.movie
+        div.filmlistbox
+          a.flexbox
+            div.imgbox
+              img(src="#{data.movie.movieImage}")
+            div.boxtxt.flex
+              h2 #{data.movie.movieNameCN}
+              ul
+                li 导演：#{data.movie.director}
+                li.eis2 演员：#{data.movie.actors}
+                li 日期：#{data.movie.releaseTime}上映
+                li 时长：#{data.movie.filmLength}分钟
+      div.tabs.serachmid
+        div.flexbox
+          div.city
+            span #{data.cityName}
+            i.demo-icon.icon-down-open-mini
+          div.flex.searchbox.flexbox
+            div.flex.searchtxt
+            a(herf="").btn_search
+      if data.cinemas
+        each cinemasFirstArray,UppercinemasKey in data.cinemas
+          dl.filmlist
+            dt._dt
+              i.demo-icon.icon-down-dir
+              | #{UppercinemasKey}
+            each _cinemas in cinemasFirstArray
+              dd
+                ul
+                  li
+                    a(href="/#{data.publicsignal}/schedule/#{_cinemas.cinemaID}/#{data.movie.movieID}").flexbox
+                      div.infobox.flex
+                        h2 #{_cinemas.cinemaName}
+                        p #{_cinemas.cinemaAddress}
+                        p 最近场次：
+                          | #{_cinemas.RecentShowtime}
+                        p.cinemasvouch
+                          if _cinemas.voucherNote != ''
+                            b #{_cinemas.voucherNote}
+                      div.pricebox
+                        p
+                          if _cinemas.isTicket
+                            span 座
+                        p.del ￥#{_cinemas.retailPrice}
+                        p.newprice
+                          | ￥#{_cinemas.limitPrice}
+                          b 起
+
+
+block prepend footer
+
+block prepend script
+  script
+    | window.publicsignal = "#{data.publicsignal}";
+    if data.movie && data.movie.movieID
+      | var movie = !{JSON.stringify(data.movie)};
+      | var movieId = "#{data.movie.movieID}";
+    else
+      | var movieId = "0";
+    if data.shareInfo
+      | var shareInfo = !{JSON.stringify(data.shareInfo)};
+  script(src="#{assets.common.js}")
+  script(src="#{assets.ticket.js}")

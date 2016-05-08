@@ -1,0 +1,11 @@
+doctype html
+html
+    head
+        include ./pagelets/head/meta.jade
+        link(rel='stylesheet', href='#{assets.app.css}')
+        // 标题
+        title 电影票友
+    body
+        div#root(style='height: 100%;')
+        script(src='#{assets.vendor.js}')
+        script(src='#{assets.app.js}')

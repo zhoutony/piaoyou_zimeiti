@@ -1,0 +1,100 @@
+extends ./layout
+
+block title
+  title 电影票友
+
+
+
+block prepend body
+
+  //wrap
+  div.wrap
+    div.medislist
+      if data && !data.err && data.sourceInfo
+        section.meditool
+          div.imgbox
+            if data.sourceInfo.backImageURL == ''
+              img(src="/tempimages/medbg.jpg" )
+            else
+              img(src="#{data.sourceInfo.backImageURL}")
+          div.medimid
+            div.main
+              div.logo.showv1
+                div.imgbor
+                  img._logo(src="#{data.sourceInfo.logoURL}")
+                span
+              h2._sourceName #{data.sourceInfo.sourceName}
+              p
+                if data.sourceInfo.isSubscribe && data.sourceInfo.isSubscribe == 'false'
+                  span.flexbox_vh_c.icoplus.m-hide#subscribe
+                    b +
+                    em 订阅
+                else
+                  span.flexbox_vh_c.icoplus.m-hide#subscribe
+                    b.m-hide(style="display:none;") +
+                    em 已订阅
+
+              p(style="display:none;")
+                b.icon_y 原创
+              p.num
+                b 票友
+                span &nbsp;
+                span._subscribe(data-subscribecount="#{data.sourceInfo.subscribeCount}") #{data.sourceInfo.subscribeCount}
+                b.mr  |
+                b 总阅读
+                span  &nbsp;#{data.sourceInfo.AllReadCount}
+              div.medtxt #{data.sourceInfo.summary}
+      div.hotmovie.mlist
+        include one_medialist
+          //- video begin
+        //- section.onevideo
+        //-      a(href="#")
+        //-          article.bigvideo
+        //-              div.videobox
+        //-                  img(src="/tempimages/video01.jpg")
+        //-                  div.i_play.flexbox_vh_c
+        //-                      i
+        //-                  time 90:11
+        //-          h2 布拉德·皮特，电影之外，他是丈夫与父亲
+        //-          p.
+        //-              在新人辈出的娱乐圈，最近冒出了一个叫做“娱乐圈老干部”的超人气天团。说的是在永远行走在时尚与潮流前线的贵圈中，有这么一群人，无论是在工作
+        //-      div.flexbox_vh_c.infomenu
+        //-          div.line.flex
+        //-          time 13分前
+        //-          span 阅读&nbsp;1223
+        //-          a.info01(style="display:none;")
+        //-              sup 99
+        //-          a.info03
+        //-          div.line.flex
+         //- video end
+                     //- section
+                     //-     div.oneimg
+                     //-         div.imgbox
+                     //-             <img src="http://p2.pstatp.com/list/10747/4275399315">
+                     //-         h2 好色 | 布拉德·皮特，电影之外，他是丈夫与父亲
+                     //-         p.
+                     //-             在新人辈出的娱乐圈，最近冒出了一个叫做“娱乐圈老干部”的超人气天团。说的是在永远行走在时尚与潮流前线的贵圈中，有这么一群人，无论是在工作、生活中都是老干部的作风。他们在年龄与“小鲜肉”的标签绝缘，在动辄炒作爆料的环境生态中却坚持为人低调，不炒作绯闻，不爱上综艺节目，相比起对潮流的关注度，他们更重视对自身演技的要求。
+                     //-     div.flexbox_vh_c.infomenu
+                     //-         div.line.flex
+                     //-         time 12-19 12:40
+                     //-         span 阅读123
+                     //-         a.info01
+                     //-             sup 99
+                     //-         a.info03
+                     //-         div.line.flex
+      div.loading.flexbox_vh_c
+        div.mui-spinner
+        div 加载中.....
+      div.infoaddimg
+        img(src="/tempimages/infoaddimg.jpg")
+
+
+block prepend footer
+
+block prepend script
+  script
+    | var sourceId = "#{data.sourceId}";
+    | window.publicsignal = "#{data.publicsignal}";
+    | var shareInfo = !{JSON.stringify(data.shareInfo)};
+  script(src="#{assets.common.js}")
+  script(src="#{assets.medialist.js}")

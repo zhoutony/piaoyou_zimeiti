@@ -1,0 +1,458 @@
+extends ./layout
+
+block title
+  if data && !data.err && data.newsInfo
+    title #{data.newsInfo.title}  -- 电影票友
+  else
+    title 电影票友
+
+block prepend body
+
+  //- //wrap
+  //- div.addticketbox.flexbox_v_c
+  //-     div.bigimgbox
+  //-     div.imgbox
+  //-          img(src="/tempimages/cinema.jpg")
+  //-     div.txtbox.flex
+  //-         h3 007
+  //-         p 导演：郑保瑞
+  //-         p 演员：托尼·贾  吴京   张晋   林嘉华   蔡瀚亿
+  //-         p 日期：2015年上映
+  //-         p 时长：120分钟
+
+  //-     div.btnbox
+  //-         h3 ¥25
+  //-         b.t
+  //-         a(href="/#").new
+  //-             i.btn_tick
+  //-             p 购票
+  //- div.addtickinfo.flexbox_v_c
+  //-     div.imgbox
+  //-         a(href='/#{data.publicsignal}/medialist/#{data.sourceId}')
+  //-             p
+  //-                 img(src="#{data.newsInfo.logoURL}")
+  //-     div.txtbox
+  //-         h3 #{data.newsInfo.weMediaName}
+  //-         time #{data.newsInfo.publishtime}
+  //-         div.intol.m-hide
+  //-             //- b.icon_y(style="display:none") 原创
+  //-             if data.newsInfo.isSubscribe && data.newsInfo.isSubscribe == 'false'
+  //-                 b.join +
+  //-                 em 订阅
+  //-             else
+  //-                 b.join.m-hide(style="display:none;") +
+  //-                 em 已订阅
+  //-     div.infomenu.flex
+  //-         div.main
+  //-             a(href="/").flexbox_v_c
+  //-                 img(src="/images/img_ico.png")
+  //-                 span 共享平台
+  //-                 b
+  //-                     sup +
+
+  //-     div.toolbox
+  //-         div.flexbox_v_c
+  //-             a.info02
+  //-             a.info03
+
+  //- if data.newsInfo.title
+  //-     h2.infotit #{data.newsInfo.title}
+  div.wrap
+    //-- vdieo begin
+    //- section.video
+    //-     article.bigvideo
+    //-         div.videobox
+    //-             img(src="/tempimages/video.jpg")
+    //-             a(href="#").i_play.flexbox_vh_c
+    //-                 i
+    //-             h2 《蚁人》
+    //-- vdieo End
+    if data && !data.err && data.newsInfo
+      div.infotxt
+        if data.movies && data.movies && data.movies.length > 0
+          - var _items = data.movies;
+          - var _len = _items.length;
+          - var _ad_firstList = _items[0];
+          - var _ad_lastList = _items[_len - 1];
+          if _len > 1
+            div.mui-slider
+              ul.mui-slider-group.mui-slider-loop
+                li.mui-slider-item.mui-slider-item-duplicate
+                  div.addticketbox.flexbox_v_c
+                    div.bigimgbox
+                    div.imgbox
+                      img(src="#{_ad_lastList.movieImage}")
+                    div.txtbox.flex
+                      h3 #{_ad_lastList.movieNameCN}
+                      p 导演：#{_ad_lastList.director}
+                      p.
+                        演员：#{_ad_lastList.actors}
+                      p 日期：#{_ad_lastList.releaseTime}
+                      p 时长：#{_ad_lastList.filmLength}分
+                      p 影评：#{_ad_lastList.intro}
+                    div.btnbox
+                      h3(style="display:none;") ¥#{indexAd.price}
+                      b(style="display:none;").t
+                      a(href="/#{data.publicsignal}/#{data.locationId}/ticket/#{_ad_lastList.movieID}").new
+                        i.btn_tick
+                        p 购票
+                each indexAd in _items
+                  li.mui-slider-item.mui-slider-item-duplicate
+                    div.addticketbox.flexbox_v_c
+                      div.bigimgbox
+                      div.imgbox
+                        img(src="#{indexAd.movieImage}")
+                      div.txtbox.flex
+                        h3 #{indexAd.movieNameCN}
+                        p 导演：#{indexAd.director}
+                        p.
+                          演员：#{indexAd.actors}
+                        p 日期：#{indexAd.releaseTime}
+                        p 时长：#{indexAd.filmLength}分
+                        p 影评：#{indexAd.intro}
+                      div.btnbox
+                        h3(style="display:none;") ¥#{indexAd.price}
+                        b(style="display:none;").t
+                        a(href="/#{data.publicsignal}/#{data.locationId}/ticket/#{_ad_lastList.movieID}").new
+                          i.btn_tick
+                          p 购票
+                li.mui-slider-item.mui-slider-item-duplicate
+                  div.addticketbox.flexbox_v_c
+                    div.bigimgbox
+                    div.imgbox
+                      img(src="#{_ad_firstList.movieImage}")
+                    div.txtbox.flex
+                      h3 #{_ad_firstList.movieNameCN}
+                      p 导演：#{_ad_firstList.director}
+                      p.
+                        演员：#{_ad_firstList.actors}
+                      p 日期：#{_ad_firstList.releaseTime}
+                      p 时长：#{_ad_firstList.filmLength}分
+                      p 影评：#{_ad_firstList.intro}
+                    div.btnbox
+                      h3(style="display:none;") ¥#{indexAd.price}
+                      b(style="display:none;").t
+                      a(href="/#{data.publicsignal}/#{data.locationId}/ticket/#{_ad_lastList.movieID}").new
+                        i.btn_tick
+                        p 购票
+          else
+            each indexAd in _items
+              div.addticketbox.flexbox_v_c
+                div.bigimgbox
+                div.imgbox
+                  a(href="/#{data.publicsignal}/#{data.locationId}/ticket/#{_ad_lastList.movieID}")
+                    img(src="#{indexAd.movieImage}")
+                div.txtbox.flex
+                  a(href="/#{data.publicsignal}/#{data.locationId}/ticket/#{_ad_lastList.movieID}")
+                    h3 #{indexAd.movieNameCN}
+                    p 导演：#{indexAd.director}
+                    p.
+                      演员：#{indexAd.actors}
+                    p 日期：#{indexAd.releaseTime}
+                    p 时长：#{indexAd.filmLength}分
+                    p 影评：#{indexAd.intro}
+                div.btnbox
+                  h3(style="display:none;") ¥#{indexAd.price}
+                  b(style="display:none;").t
+                  a(href="/#{data.publicsignal}/#{data.locationId}/ticket/#{_ad_lastList.movieID}").new
+                    i.btn_tick
+                    p 购票
+          div.addtickinfo.flexbox_v_c
+            div.imgbox
+              a(href='/#{data.publicsignal}/medialist/#{data.sourceId}')
+                p
+                  img(src="#{data.newsInfo.logoURL}")
+            div.txtbox
+
+              h3
+                a(href='/#{data.publicsignal}/medialist/#{data.sourceId}') #{data.newsInfo.weMediaName}
+              time
+                a(href='/#{data.publicsignal}/medialist/#{data.sourceId}') #{data.newsInfo.publishtime}
+              div.intol.m-hide
+                //- b.icon_y(style="display:none") 原创
+                if data.newsInfo.isSubscribe && data.newsInfo.isSubscribe == 'false'
+                  b.join +
+                  em 订阅
+                else
+                  b.join.m-hide(style="display:none;") +
+                  em 已订阅
+            div.infomenu.flex
+              div.main
+                a(href="/").flexbox_v_c
+                  img(src="/images/img_ico.png")
+                  span 共享平台
+                  b
+                    sup +
+
+            div.toolbox
+              div.flexbox_v_c
+                a.info02
+                a.info03
+          if data.newsInfo.title
+            h2.infotit #{data.newsInfo.title}
+
+        else
+          header.infoheader
+            div.infotool
+              div.flexbox_v_c
+                div.logobox
+                  a(href='/#{data.publicsignal}/medialist/#{data.sourceId}')
+                    p
+                      img(src="#{data.newsInfo.logoURL}")
+                div.imgbox#subscribe
+                  h2 #{data.newsInfo.weMediaName}
+
+                  p.flexbox_v_c.m-hide
+                    //- b.icon_y(style="display:none") 原创
+                    if data.newsInfo.isSubscribe && data.newsInfo.isSubscribe == 'false'
+                      b.join +
+                      em 订阅
+                    else
+                      b.join.m-hide(style="display:none;") +
+                      em 已订阅
+                div.txtbox.flex
+                  a(href='/#{data.publicsignal}/medialist/#{data.sourceId}')
+                    p 在电影的时光读懂自已
+
+          if data.newsInfo.title
+            h2.infotit #{data.newsInfo.title}
+
+          div.infomenu.flexbox_v_c
+            div.main.flex
+              a(href="/").flexbox_v_c
+                img(src="/images/img_ico.png")
+                span 共享平台
+                b
+                  sup +
+                span
+                  time #{data.newsInfo.publishtime}
+            a.info05(style="display:none; ")
+              sup #{data.newsInfo.readCount}
+              //- #{data.newsInfo.readCount}
+            a.info02
+            a.info03
+
+        div.infocon.hidden#newsContent
+          div._txt
+          a.more.flexbox_vh_c.m-hide
+            b +
+            span 阅读全文
+        div.formtxt
+          div.main 阅读：#{data.newsInfo.readCount}
+          div.aside
+            | 原页面经票友开放平台转码整理 文章来源
+            a(href="#{data.newsInfo.sourceURL}") #{data.newsInfo.weMediaName}
+        div.sharetoolbox.m-hide
+          a
+            i.b_fav
+            span 1
+          a
+            i.b_weixin
+            span 1
+          a
+            i.b_oicq
+            span 1
+          a
+            i.b_sina
+            span 1
+        div.codeinfo.flexbox
+        //- div.addticketbox
+        //-     div.flexbox_v_c
+        //-         div.bigimgbox
+        //-         div.imgbox
+        //-              img(src="/tempimages/cinema.jpg")
+        //-         div.txtbox.flex
+        //-             h3 007
+        //-             p 导演：郑保瑞
+        //-             p 演员：托尼·贾  吴京   张晋   林嘉华   蔡瀚亿
+        //-             p 日期：2015年上映
+        //-             p 时长：120分钟
+
+        //-         div.btnbox
+        //-             h3 ¥25
+        //-             b.t
+        //-             a(href="/#").new
+        //-                 i.btn_tick
+        //-                 p 购票
+        div.conttxt
+          if data && !data.err && data.newsInfo
+            div.infotxt
+              if data.movies && data.movies && data.movies.length > 0
+                - var _items = data.movies;
+                - var _len = _items.length;
+                - var _ad_firstList = _items[0];
+                - var _ad_lastList = _items[_len - 1];
+                if _len > 1
+                  div.mui-slider
+                    ul.mui-slider-group.mui-slider-loop
+                      li.mui-slider-item.mui-slider-item-duplicate
+                        div.addticketbox
+                          div.flexbox_v_c
+                            div.bigimgbox
+                            div.imgbox
+                              img(src="#{_ad_lastList.movieImage}")
+                            div.txtbox.flex
+                              h3 #{_ad_lastList.movieNameCN}
+                              p 导演：#{_ad_lastList.director}
+                              p.
+                                演员：#{_ad_lastList.actors}
+                              p 日期：#{_ad_lastList.releaseTime}
+                              p 时长：#{_ad_lastList.filmLength}
+
+                            div.btnbox
+                              h3(style="display:none;") ¥#{indexAd.price}
+                              b(style="display:none;").t
+                              a(href="/#{data.publicsignal}/#{data.locationId}/ticket/#{_ad_lastList.movieID}").new
+                                i.btn_tick
+                                p 购票
+                      each indexAd in _items
+                        li.mui-slider-item.mui-slider-item-duplicate
+                          div.addticketbox
+                            div.flexbox_v_c
+                              div.bigimgbox
+                              div.imgbox
+                                img(src="#{indexAd.movieImage}")
+                              div.txtbox.flex
+                                h3 #{indexAd.movieNameCN}
+                                p 导演：#{indexAd.director}
+                                p.
+                                  演员：#{indexAd.actors}
+                                p 日期：#{indexAd.releaseTime}
+                                p 时长：#{indexAd.filmLength}
+
+                              div.btnbox
+                                h3(style="display:none;") ¥#{indexAd.price}
+                                b(style="display:none;").t
+                                a(href="/#{data.publicsignal}/#{data.locationId}/ticket/#{_ad_lastList.movieID}").new
+                                  i.btn_tick
+                                  p 购票
+                      li.mui-slider-item.mui-slider-item-duplicate
+                        div.addticketbox
+                          div.flexbox_v_c
+                            div.bigimgbox
+                            div.imgbox
+                              img(src="#{_ad_firstList.movieImage}")
+                            div.txtbox.flex
+                              h3 #{_ad_firstList.movieNameCN}
+                              p 导演：#{_ad_firstList.director}
+                              p.
+                                演员：#{_ad_firstList.actors}
+                              p 日期：#{_ad_firstList.releaseTime}
+                              p 时长：#{_ad_firstList.filmLength}分
+
+                            div.btnbox
+                              h3(style="display:none;") ¥#{indexAd.price}
+                              b(style="display:none;").t
+                              a(href="/#{data.publicsignal}/#{data.locationId}/ticket/#{_ad_lastList.movieID}").new
+                                i.btn_tick
+                                p 购票
+                else
+                  each indexAd in _items
+                    div.addticketbox
+                      div.flexbox_v_c
+                        div.bigimgbox
+                        div.imgbox
+                          a(href="/#{data.publicsignal}/#{data.locationId}/ticket/#{_ad_lastList.movieID}")
+                            img(src="#{indexAd.movieImage}")
+                        div.txtbox.flex
+                          a(href="/#{data.publicsignal}/#{data.locationId}/ticket/#{_ad_lastList.movieID}")
+                          h3 #{indexAd.movieNameCN}
+                          p 导演：#{indexAd.director}
+                          p.
+                            演员：#{indexAd.actors}
+                          p 日期：#{indexAd.releaseTime}
+                          p 时长：#{indexAd.filmLength}分
+
+                        div.btnbox
+                          h3(style="display:none;") ¥#{indexAd.price}
+                          b(style="display:none;").t
+                          a(href="/#{data.publicsignal}/#{data.locationId}/ticket/#{_ad_lastList.movieID}").new
+                            i.btn_tick
+                            p 购票
+
+        div.txthot
+          h2.hottie 精彩推荐
+          div.hotmovie
+            //-- vdieo begin
+            //- section.onevideo
+            //-     a(href="#")
+            //-         article.bigvideo
+            //-             div.videobox
+            //-                 img(src="/tempimages/video01.jpg")
+            //-                 a(href="#").i_play.flexbox_vh_c
+            //-                     i
+            //-         ul.flexbox_v_c
+            //-             li.flex
+            //-                 h2.
+            //-                     票友推荐 | 轻熟男养成秘籍！
+            //-         footer.flexbox
+            //-                 div.main.flex.flexbox_v_c
+            //-                     span.n_name Dreamers电影评论
+            //-                     span.num 阅读
+            //-                         b 37
+            //-                     time 1小时前
+            //-- vdieo End
+            if data && !data.err && data.movieNews && data.movieNews.Items
+              each movieNew, index in data.movieNews.Items
+                - var _time = Math.floor( (new Date() - new Date(movieNew.publishtime)) / 1000 / 60 )
+                - var _date = _time > 59 ? movieNew.publishtime : _time + "分钟前";
+                if movieNew.image2 == '' || movieNew.image3 == ''
+
+                  section.imgtxt
+                    a(href="/#{data.publicsignal}/movienews/#{movieNew.sourceType}/#{movieNew.movieNewID}")
+                      ul.flexbox_v_c
+                        li.flex
+                          h2 #{movieNew.title}
+                        li
+                          img(src="#{movieNew.image1}")
+                      footer.flexbox
+                        div.main.flex.flexbox_v_c
+                          span.n_name #{movieNew.weMediaName}
+                          span.num 阅读
+                            b #{movieNew.readCount}
+                          time #{_date}
+                else
+                  section
+                    a(href="/#{data.publicsignal}/movienews/#{movieNew.sourceType}/#{movieNew.movieNewID}")
+                      div.flexbox_v_c
+                        h2.flex #{movieNew.title}
+
+                      ul.flexbox
+                        li.flex
+                          img(src="#{movieNew.image1}")
+                        li.flex
+                          img(src="#{movieNew.image2}")
+                        li.flex
+                          img(src="#{movieNew.image3}")
+                      footer.flexbox
+                        div.main.flex.flexbox_v_c
+                          span.n_name #{movieNew.weMediaName}
+                          span.num 阅读
+                            b #{movieNew.readCount}
+                          time #{_date}
+
+        div.infoaddimg
+
+
+
+block prepend footer
+
+block prepend script
+  script
+    //- | var title = "#{data.newsInfo.title}";
+    if data
+      if data.newsInfo
+        if data.newsInfo.content
+          | var newscontent = !{JSON.stringify(data.newsInfo.content ? data.newsInfo.content : '')};
+        if data.newsInfo.summary
+          | var _summary = "#{data.newsInfo.summary}";
+        if data.newsInfo.weMediaName
+          | var weMediaName = '#{data.newsInfo.weMediaName}';
+        | var shareInfo = !{JSON.stringify(data.shareInfo)};
+      | var newsId = "#{data.newsId}";
+      | var sourceId = "#{data.sourceId}";
+      | window.publicsignal = "#{data.publicsignal}";
+    //- var newscontent = '#{data.newsInfo.content}';
+
+  script(src="#{assets.common.js}")
+  script(src="#{assets.movienews.js}")

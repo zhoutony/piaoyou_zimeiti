@@ -1,0 +1,179 @@
+extends ./layout
+
+mixin adsItem(ads)
+  if(ads.isVideo === 1)
+    a(href="#{ads.url}").videobox
+      img(src="#{ads.imageUrl}")
+      time #{ads.video.duration}
+  else
+    a(href="#{ads.url}")
+      img(src="#{ads.imageUrl}")
+
+block title
+  title 电影票友
+
+block prepend body
+  div#ptr
+    span.tip
+    div.loading
+      div.mui-spinner
+      span 加载中.....
+  //- wrap
+  div.wrap
+    div#content
+      //- 轮刷1广告
+      if(data && data.firstAds && data.firstAds.length > 0)
+        div.scrollpic.mui-slider.imgico
+          ul.mui-slider-group.mui-slider-loop
+            - var _ad_firstList = data.firstAds[0];
+            - var _ad_firstLen = data.firstAds.length;
+            - var _ad_lastList = data.firstAds[_ad_firstLen - 1];
+            if _ad_lastList
+              li.mui-slider-item.mui-slider-item-duplicate
+                +adsItem(_ad_lastList)
+            each indexAd in data.firstAds
+              if indexAd
+                li.mui-slider-item
+                  +adsItem(indexAd)
+            if _ad_firstList
+              li.mui-slider-item.mui-slider-item-duplicate
+                +adsItem(_ad_firstList)
+          div.currbox.mui-slider-indicator
+            each indexAd, index in data.firstAds
+              if indexAd
+                span.mui-indicator
+
+        div._txtboxs_
+          each indexAd, index in data.firstAds
+            if indexAd && indexAd.movie
+              - var _class_name = index == 0 ? "txtbox" : "txtbox m-hide";
+              - var _link = '/'+ data.publicsignal +'/'+ data.locationId +'/ticket/' + indexAd.movieID;
+              div.txtbox(class="#{_class_name}")
+                h2 #{indexAd.movie.movieNameCN}
+                div.txtmid
+                  p #{indexAd.movie.intro}
+                div.sharetool
+
+                  a(href='#{_link}').ico_ticket
+
+                  a.ico_price(style="display:none;")
+
+      //轮刷2广告
+      div.scrollpic1
+        h2
+          span 耳语
+        a(href="#").btn_share.m-hide
+        if(data && data.secondAds && data.secondAds.length > 0)
+          div.mui-slider
+            div.mui-slider-group.mui-slider-loop
+              - var _ad_secondList = data.secondAds[0];
+              - var _ad_secondLen = data.secondAds.length;
+              - var _ad_secondlastList = data.secondAds[_ad_secondLen - 1];
+              div.addimg.mui-slider-item.mui-slider-item-duplicate
+                if _ad_secondlastList
+                  a(href="#{_ad_secondlastList.url}")
+                    img(src="#{_ad_secondlastList.imageUrl}")
+
+              each secondAd, index in data.secondAds
+                div.addimg.mui-slider-item
+                  a(href="#{secondAd.url}")
+                    img(src="#{secondAd.imageUrl}")
+              if _ad_secondList
+                div.mui-slider-item.mui-slider-item-duplicate
+                  a(href="#{_ad_secondList.url}")
+                    img(src="#{_ad_secondList.imageUrl}")
+
+      div._thirdads.m-hide.txtpic
+        if(data && data.thirdAds && data.thirdAds.length)
+          div._mui-slider.mui-slider
+            div.mui-slider-group.mui-slider-loop
+              - var _ad_secondList = data.thirdAds[0];
+              - var _ad_secondLen = data.thirdAds.length;
+              - var _ad_secondlastList = data.thirdAds[_ad_secondLen - 1];
+              if _ad_secondlastList
+                div.mui-slider-item.mui-slider-item-duplicate
+                  section
+                    a(href="#{_ad_secondlastList.url}")
+                      div.flexbox_v_c
+                        h2.flex #{_ad_secondlastList.advertisementName}
+                      img(src="#{_ad_secondlastList.imageUrl}")
+                      footer.flexbox
+                        div.main.flex
+                          span.ico_edit_top 推广
+                          span.n_name #{_ad_secondlastList.weMediaName}
+
+              each secondAd, index in data.thirdAds
+                div.mui-slider-item
+                  section
+                    a(href="#{secondAd.url}")
+                      div.flexbox_v_c
+                        h2.flex  #{secondAd.advertisementName}
+                      img(src="#{secondAd.imageUrl}")
+                      footer.flexbox
+                        div.main.flex
+                          span.ico_edit_top 推广
+                          span.n_name #{secondAd.weMediaName}
+              if _ad_secondList
+                div.mui-slider-item.mui-slider-item-duplicate
+                  section
+                    a(href="#{_ad_secondList.url}")
+                      div.flexbox_v_c
+                        h2.flex #{_ad_secondList.advertisementName}
+                      img(src="#{_ad_secondList.imageUrl}")
+                      footer.flexbox
+                        div.main.flex
+                          span.ico_edit_top 推广
+                          span.n_name #{_ad_secondList.weMediaName}
+
+      div.hotmovie
+
+      div.loading.flexbox_vh_c
+        div.mui-spinner
+        div 加载中.....
+    //- div.addstart
+    //-     p
+    //-         a(href="/#{data.publicsignal}/#{data.locationId}/filmlist/hot")
+    //- a.gotolist.showgotolist( href="/#{data.publicsignal}/selflist")
+    div.navtool
+      ul.flexbox
+        li.flex.curr
+          a(href="javascript:;")
+            i.n01
+            | 头条
+        li.flex.newflex
+          a(href="/#{data.publicsignal}/#{data.locationId}/filmlist/hot")
+            i.n02
+            | 电影
+        li._piaoyouguide
+          a
+            i.nadd
+        li.flex.newflex
+          //- .showtips
+          a(href="/#{data.publicsignal}/selflist")
+            i.n03
+            | 发现
+            div.navtips
+        li.flex
+          a(href="/#{data.publicsignal}/my/index")
+            i.n04
+            | 我的
+
+block prepend footer
+
+block prepend script
+  script
+    if data
+      | var data = !{JSON.stringify(data)};
+      if data.baseData
+        | var thirdIndex = '#{data.baseData.thirdIndex}';
+        | var shareInfo = !{JSON.stringify(data.baseData.shareInfo)};
+      else
+        | var thirdIndex = '0';
+        | var shareInfo = '';
+      | window.publicsignal = '#{data.publicsignal}';
+      | var cachetime = '#{data.cachetime}';
+
+  script(src="#{assets.common.js}")
+  script(src="#{assets.index.js}")
+
+

@@ -1,0 +1,120 @@
+extends ./layout
+
+block title
+  title 电影票友
+
+
+
+block prepend body
+  //- div.maskshare
+  //- wrap
+  div.wrap
+    div.succ.mytool
+      div.myheader(style="background:url(/images/mybg.jpg) no-repeat center top;background-size:100% auto;")
+        if data && !data.err
+          dl
+            if data.uses
+              dt.myphoto
+                img(src="#{data.uses.headImgurl}")
+              dd
+                b #{data.uses.nick}
+                div.myadd
+                  a.flexbox_vh_c(href="/#{data.publicsignal}/selflist")
+
+                    em +
+                p.myprice 余额：0.00元
+                p.mytxt 在电影的时光读懂自已！
+            else
+              dt.myphoto
+              dd
+                b
+                div.myadd.flexbox_vh_c
+                  a.flexbox_vh_c(href="/#{data.publicsignal}/selflist")
+
+                    em +
+                p.myprice 余额：0.00元
+                p.mytxt 在电影的时光读懂自已！
+
+      ul.navmy.flexbox
+        li.curr.flex 我的足迹
+        li.flex 我的中心
+
+
+      nav.mynav.m-hide
+        ul.flexbox_v_c
+          li.flex
+            a(href="") 登录
+          li.flex
+            i.ico_io
+          li.flex
+            a(href="") 注册
+      div.subtablist.userNews
+        div.empty(style= data.userNews ? 'display:none' : '')
+
+        ul.mylistbox(style= data.userNews ? '' : 'display:none')
+          include ./pagelets/user-news
+        div.loading(style='display: none;')
+          div.mui-spinner
+          div 加载中.....
+      div.subtablist(style="display:none;")
+        div.mymenu
+          ul.flexbox
+            li(data-item="myorders")
+              a
+                i.n01
+                p 订单
+            li(data-item="")
+              a
+                i.n02
+                p 衍生品
+            li(data-item="mypiao")
+              a
+                i.n03
+                p 卡包
+          ul.flexbox
+            li(data-item="myredbag")
+              a
+                i.n04
+                p 红包
+            li(data-item="")
+              a
+                i.n05
+                p 活动
+            li(data-item="")
+              a
+                i.n06
+                p 设置
+
+      //- include ./pagelets/head/footer
+      //- footer.footer.myfoot
+      //-     h2 客服电话：4008-188-188
+      //-     p 电影票友服务由北京亚视联合在线科技有限公司提供
+  div.navtool
+    ul.flexbox
+      li.flex
+        a(href="/")
+          i.n01
+          | 头条
+      li.flex
+        a(href="/#{data.publicsignal}/#{data.locationId}/filmlist/hot")
+          i.n02
+          | 电影
+      li._piaoyouguide
+        a
+          i.nadd
+      li.flex.newflex
+        //.showtips
+        a(href="/#{data.publicsignal}/selflist")
+          i.n03
+          | 发现
+          div.navtips
+      li.flex.curr
+        a(href="javascript:;")
+          i.n04
+          | 我的
+
+block prepend footer
+
+block prepend script
+  script(src="#{assets.common.js}")
+  script(src="#{assets.mine.js}")

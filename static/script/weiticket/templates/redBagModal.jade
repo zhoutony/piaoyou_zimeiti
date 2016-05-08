@@ -1,0 +1,45 @@
+div#redBag.orderbox
+    dt
+        a
+            | 红包
+    dd
+        div.cardpop
+            nav
+                ul.flexbox
+                    li.flex(
+                        v-bind:class="{curr: currentTab === 1}"
+                        v-on:click="changeTab(1)"
+                    )
+                        未使用({{ unusedCount }})
+                    li.flex(
+                        v-bind:class="{curr: currentTab === 2}"
+                        v-on:click="changeTab(2)"
+                    )
+                        已过期({{ expiredCount }})
+                    li.flex(
+                        v-bind:class="{curr: currentTab === 3}"
+                        v-on:click="changeTab(3)"
+                    )
+                        已使用({{ usedCount }})
+            ul.cardmid(v-show="!hasNoRedBag")
+                li(
+                    v-for="redBag in redBagList"
+                    v-bind:class="{new: redBag.status == 1}"
+                    v-show="redBag.status == currentTab"
+                )
+                    div.cardlay
+                        div.cardinfo.flexbox_v_c
+                            div.flex.main
+                                p 红包
+                                p ￥{{ redBag.money }}
+                            div.aside
+                                p 仅可购买电影票
+                                p 满{{ redBag.lowest }}元可用
+                    div.cardend.flexbox
+                        div.flex.main {{ redBag.remarks }}
+                        div.aside {{ redBag.expiredTime }}到期
+                            span(v-if="redBag.remainTime") （仅剩 {{ redBag.remainTime }}）
+            div.redempty(v-show="hasNoRedBag")
+                p
+                    i
+                    | 还没有红包哦

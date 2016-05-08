@@ -1,0 +1,31 @@
+extends ./layout
+
+block title
+  title 电影票友
+
+block prepend body
+  //wrap
+  div.wrap
+    div.succ.orderwait
+      dl
+        dt
+          i
+        dd
+
+          p 正在出票...
+      div.succinfo
+        //- h2 蚁人
+        //- p 北京沃美影城（常营店）
+        //- p 3D | 今天（10月17日） 18:20
+        //- p
+        //-     i.ico_tick 1排7座
+    include ./pagelets/footer.jade
+
+block prepend footer
+
+block prepend script
+  script
+    | window.publicsignal = "#{data.publicsignal}";
+    | var orderId = "#{data.orderId}";
+  script(src="#{assets.common.js}")
+  script(src="#{assets.orderwait.js}")

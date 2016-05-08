@@ -1,0 +1,90 @@
+if !data.err && data.citys
+    //- citypop
+    div.citypop
+        div.rulecolse
+                a.btn_cancel(href="")
+        div.citybox.city-list
+            div.citytit.flexbox_v_c
+                a.citybtn.flex
+                //-     i.icon-angle-left 
+                //-     | 返回
+            div.citysearch.flexbox
+                input.flex.txt(type="text",placeholder="输入城市名或拼音查询")
+            div.citylist.m-hide#searchData
+                h4 搜索结果
+                ul
+                    each citisFirstArray,UpperCityKey in data.citys
+                        if citisFirstArray && citisFirstArray.length > 0
+                            each city in citisFirstArray
+                                li.m-hide(data-locationid="#{city.locationID}", data-serchstr="#{city.namePinyinShort}#{city.nameCN}#{city.namePinyin}", data-namecn="#{city.nameCN}")
+                                    span #{city.nameCN}
+            div#mainBody
+                div.list-wrapper.citylist.m-hide
+                    h3 最近访问
+                    ul
+                        li
+                            span 北京
+                div.list-wrapper.citylist
+                    h3 热门城市
+                    ul
+                        li(data-locationid="110100", data-namecn="北京市")
+                            span 北京市
+                        li(data-locationid="310100", data-namecn="上海市")
+                            span 上海市
+                        li(data-locationid="420100", data-namecn="武汉市")
+                            span 武汉市
+                        li(data-locationid="440300", data-namecn="深圳市")
+                            span 深圳市
+                        li(data-locationid="500200", data-namecn="重庆市")
+                            span 重庆市
+                        li(data-locationid="440100", data-namecn="广州市")
+                            span 广州市
+                        li(data-locationid="510100", data-namecn="成都市")
+                            span 成都市
+                        li(data-locationid="430100", data-namecn="长沙市")
+                            span 长沙市
+
+                div.citylist(style="display:non1e")
+                    dl
+                        each citisFirstArray,UpperCityKey in data.citys
+                            if citisFirstArray && citisFirstArray.length > 0
+                                dt #{UpperCityKey}
+                                    dd
+                                        ul
+                                            each city in citisFirstArray
+                                                li(data-locationid="#{city.locationID}", data-namecn="#{city.nameCN}")
+                                                    a
+                                                        | #{city.nameCN}
+            aside.citytool
+                ul
+                    li A
+                    li B
+                    li C
+                    li D
+                    li E
+                    li F
+                    li G
+                    li H
+                    li I
+                    li J
+                    li K
+                    li L
+                    li M
+                    li N
+                    li O
+                    li P
+                    li Q
+                    li R
+                    li S
+                    li T
+                    li U
+                    li V
+                    li W
+                    li X
+                    li Y
+                    li Z
+                     
+
+        
+
+
