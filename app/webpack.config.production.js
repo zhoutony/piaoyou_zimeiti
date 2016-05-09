@@ -28,7 +28,7 @@ module.exports = {
     path: path.join(__dirname, '../dist/new_static'),
     filename: '[name].[hash].js',
     chunkFilename: '[id].[hash].chunk.js',
-    publicPath: '//js.moviefan.com.cn/new_static/',
+    publicPath: '//js.moviefan.com.cn/piaoyou_fe/new_static/',
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),

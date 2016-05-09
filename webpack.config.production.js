@@ -31,7 +31,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, './dist/script/'),
     filename: '[name].[hash].js',
-    publicPath: '//js.moviefan.com.cn/script/',
+    publicPath: '//js.moviefan.com.cn/piaoyou_fe/script/',
   },
   module: {
     loaders: [
