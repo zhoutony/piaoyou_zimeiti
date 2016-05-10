@@ -36,7 +36,7 @@ function isLoggedIn(req, res, next) {
   var apiURL = '/queryWeixinBaseConfigInfo.aspx';
 
   var options = {
-    uri: apiURL
+    url: apiURL
   };
 
   var publicsignalshort_data = {};
