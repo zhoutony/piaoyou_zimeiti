@@ -107,7 +107,7 @@
   padding: 10px;
 }
 
-.recommendNewsList h2 {
+.recommendNewsList > h2 {
   font-size: 1.33rem;
   color: #00948D;
   padding: .5rem .83rem;

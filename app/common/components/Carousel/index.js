@@ -9,11 +9,11 @@ class Carousel extends Component {
   };
 
   render() {
-    const { children, hideDots, onChange, className='' } = this.props;
+    const { children, hideDots, onChange, className='', autoPlay=true } = this.props;
     const { current } = this.state;
 
     const swipeOptions = {
-      // auto: 10e3,
+      auto: autoPlay ? 5e3 : false,
       continuous: true,
       callback: (current) => {
         current %= children.length;

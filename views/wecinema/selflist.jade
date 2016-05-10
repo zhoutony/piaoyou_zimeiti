@@ -8,48 +8,6 @@ block prepend body
     //wrap
     div.wrap.hide
         div.selflist
-            div.selftit.flexbox_v_c
-                i
-                p 推荐自媒体
-            div.scrollselful
-                ul.flexbox_v_c
-                    li(v-for="info in newsSourceInfos", v-if="info.isTop", v-bind:class="{ 'join': info.isSubscribe }", data-id="{{ info.sourceID }}", v-on:click="toggleSubscribe")
-                        a.selfclose
-                        a(href="javascript:;")
-                            div.imgbox
-                                img(:src="info.logoURL")
-                            div.textbox
-                                h2 {{ info.sourceName }}
-
-                    //li
-                    //    a.selfclose
-                    //    a(href="")
-                    //        div.imgbox
-                    //            img(src="/images/logo180.png")
-                    //        div.textbox
-                    //            h2 电影票友
-                    //li.join
-                    //    a.selfclose
-                    //    a(href="")
-                    //        div.imgbox
-                    //            img(src="/images/logo180.png")
-                    //        div.textbox
-                    //            h2 电影票友
-                    //li
-                    //    a.selfclose
-                    //    a(href="")
-                    //        div.imgbox
-                    //            img(src="/images/logo180.png")
-                    //        div.textbox
-                    //            h2 电影票友
-                    //li
-                    //    a.selfclose
-                    //    a(href="")
-                    //        div.imgbox
-                    //            img(src="/images/logo180.png")
-                    //        div.textbox
-                    //            h2 电影票友
-                    //
             //- header end
             div.selfcont
                 ul.navmy.flexbox

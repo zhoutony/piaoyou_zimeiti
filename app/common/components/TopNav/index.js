@@ -5,9 +5,9 @@ var styles = require('./styles.css');
 
 const TopNav = ({ channel }) => {
   const items = [
-    { id: 'all', label: '推荐', link: '/' },
-    { id: 'videos', label: '视频', link: 'videos' },
-    { id: 'movies', label: '在线电影', link: 'movies' },
+    { id: 'all', label: '推荐 Explore', link: '/' },
+    { id: 'videos', label: '视频 Video', link: 'videos' },
+    { id: 'movies', label: '电影 Movie', link: 'movies' },
   ].map(function(item) {
     let classNames = [styles.item];
 
@@ -25,7 +25,7 @@ const TopNav = ({ channel }) => {
   return (
     <div className={styles.container}>
       {items}
-      <a href='/selflist' className={styles.item}>订阅</a>
+      <a href='/selflist' className={styles.item}>订阅 Following</a>
     </div>
   );
 };

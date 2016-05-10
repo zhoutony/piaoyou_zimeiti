@@ -40,7 +40,7 @@ class Videos extends Component {
           loading={newsLoading}
           className={styles.content}
           onLoad={() => loadVideosNewsList(newsPage + 1)}>
-          {adsList.length ? <CarouselAds showTitle={true} adsList={adsList} /> : null}
+          {adsList.length ? <CarouselAds showInfo={true} adsList={adsList} /> : null}
           {newsList.length ? <NewsList newsList={newsList} wxChannel={wxChannel}/> : null}
         </Refreshable>
         <BottomNav current='home' wxChannel={wxChannel}/>

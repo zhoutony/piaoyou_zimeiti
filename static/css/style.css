@@ -1199,7 +1199,7 @@ opacity:0
 .navtips { width: 5.4rem; height: 6.4rem; opacity: 0; background: url(../images/navtips.png) center center no-repeat; background-size: cover; position: absolute; left: 50%; margin-left: -2.7rem; top: -6.4rem; z-index: -1; -webkit-transition: .5s all; -moz-transition: .5s all; -o-transition: .5s all; -ms-transition: .5s all; transition: .5s all }
 .maskshare { position: fixed; top: 0; left: 0; bottom: 0; right: 0; z-index: 100; background: url(../images/maskshare.png) no-repeat rgba(0,0,0,.6); background-size: 100% auto }
 .hauto, .selflist { height: 100% }
-.selflist { padding-top: 3.5rem }
+
 .scrollselful { overflow: auto; padding: .5rem 0 0; margin: 1rem 0 2rem 4rem; -webkit-overflow-scrolling: touch }
 .scrollselful li { padding: 0 1.4rem 0 0; text-align: center; position: relative }
 .selful { padding: 1.5rem 0 1.5rem 3.5rem }
@@ -1221,7 +1221,6 @@ opacity:0
 .selful .btn_join { padding: 1.5rem 3.5rem 1.5rem 1.5rem }
 .selful .btn_join span { width: 3rem; height: 3rem; text-align: center; line-height: 2.4rem; background: #00948D; color: #fff; font-size: 2.4rem }
 .selful .btn_curr span { background: #EEEEEF }
-.selfcont { border-top: .5rem solid #DBDCDC }
 .selfcont .navmy li:after { display: none }
 .selfcont .seltit { padding: 1.5rem 4.5rem; font-size: 1rem; color: #00948D }
 .selfcont .seltit i { display: inline-block; vertical-align: middle; background: #00948D; width: .7rem; height: .7rem; overflow: hidden; border-radius: 1rem; margin-right: .5rem }
@@ -1358,7 +1357,7 @@ transform:scale(1)
 .subtablist .selful{padding: 1.5rem 1.5rem 1.5rem 1.5rem }
 .subtablist .selful .toolbox .btn_join{padding-left:0;padding-top:1rem;padding-bottom:1rem;}
 .subtablist .selful .toolbox .btn_join span{font-size:2rem;line-height:1;
- padding:0rem 0 .5rem;height:auto;line-height:1;display:block;}
+ padding:0rem 0 .5rem;height:auto;line-height:1;display:block; font-weight: bolder;}
 .subtablist  .selful .textbox h2{font-size:1.4rem;}
 .subtablist  .selful .textbox  .selfinfo,
 .subtablist  .selful .textbox  .selftip span{font-size:1rem;}

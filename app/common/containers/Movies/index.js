@@ -41,8 +41,11 @@ class Movies extends Component {
           loading={newsLoading}
           className={styles.content}
           onLoad={() => loadMoviesNewsList(newsPage + 1, filters)}>
-          {adsList.length ? <CarouselAds showTitle={true} adsList={adsList} /> : null}
-          <VideoFilter filters={filters} onChange={(filters) => refreshMoviesNewsList(1, filters)}/>
+          {adsList.length ? <CarouselAds showInfo={true} adsList={adsList} /> : null}
+          <VideoFilter
+            className={styles.videoFilter}
+            filters={filters}
+            onChange={(filters) => refreshMoviesNewsList(1, filters)}/>
           {newsList.length ? <NewsList newsList={newsList} wxChannel={wxChannel}/> : null}
         </Refreshable>
         <BottomNav current='home' wxChannel={wxChannel}/>

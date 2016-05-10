@@ -28,7 +28,7 @@ const NewsCover = ({ news, image }) => {
 
 const News = ({ news, wxChannel }) => {
   const {
-    newID, showType, publishID, publishLogo, title, summary, url, publishtime, count, images
+    newID, NewTopType, showType, publishID, publishName, title, summary, url, publishtime, count, images
   } = news;
 
   let contentClassNameList = [styles.content];
@@ -61,9 +61,10 @@ const News = ({ news, wxChannel }) => {
         </div>
         <div className={styles.infoContainer}>
           <div className={styles.info}>
-            {publishLogo && <img src={publishLogo}/>}
+            <span className={styles.publishName}>{publishName}</span>
             <span>{moment(publishtime, 'YYYY-MM-DD HH:mm:ss').fromNow()}</span>
-            <span>阅读{count}</span>
+            <span>阅读 {count}</span>
+            {NewTopType ? <span className={styles.tag}>{NewTopType}</span> : null}
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 }
 
 .content {
@@ -39,7 +39,7 @@
 .desc h2 {
   font-size: 1.33rem;
   color: #231815;
-  margin-top: .5rem;
+  margin-top: 1rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -47,24 +47,25 @@
 }
 
 .desc p {
-  font-size: .75rem;
-  line-height: 1rem;
+  font-size: 1rem;
+  line-height: 1.2rem;
   color: #9e9e9f;
-  max-height: 3rem;
+  max-height: 2.4rem;
   overflow: hidden;
   text-overflow: ellipsis;
   padding: 0 1.5rem;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   display: -webkit-box;
   -webkit-box-orient: vertical;
+  margin-top: .3rem;
 }
 
 .infoContainer {
   color: #9e9e9f;
-  font-size: .58rem;
+  font-size: .83rem;
   display: flex;
   align-items: center;
-  margin-top: .5rem;
+  margin-top: 1.5rem;
 }
 
 .infoContainer::before,
@@ -82,7 +83,7 @@
 }
 
 .info {
-  padding: 0 1rem;
+  padding: 0 2rem;
   display: flex;
   align-items: center;
 }
@@ -97,13 +98,19 @@
   margin-left: 5px;
 }
 
+.info .tag {
+  font-size: .67rem;
+  color: #fff;
+  background: #00948D;
+  padding: 0 .5rem;
+}
+
 .smallContent {
   flex-wrap: nowrap;
 }
 
 .smallContent .covers {
-  flex: 0 auto;
-  width: 9.58rem;
+  flex: 1 0;
   order: 2;
 }
 
@@ -111,6 +118,23 @@
   width: 100%;
 }
 
+.smallContent .desc {
+  flex: 2 0;
+  text-align: left;
+}
+
 .smallContent .desc h2 {
   margin-top: 0;
+  text-overflow: initial;
+  overflow: auto;
+  white-space: initial;
+}
+
+.smallContent .desc h2,
+.smallContent .desc p {
+  padding: 0 .5rem 0 0;
+}
+
+.publishName {
+  color: #00948D;
 }

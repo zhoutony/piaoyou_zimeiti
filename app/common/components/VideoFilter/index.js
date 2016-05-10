@@ -59,9 +59,9 @@ const SecondFilter = ({ current, onChange }) => {
   );
 };
 
-const VideoFilter = ({ filters, onChange }) => {
+const VideoFilter = ({ filters, onChange, className='' }) => {
   return (
-    <div className={styles.container}>
+    <div className={[styles.container, className].join(' ')}>
       <FirstFilter current={filters[0]} onChange={(value) => {
         onChange([value, filters[1]]);
       }} />

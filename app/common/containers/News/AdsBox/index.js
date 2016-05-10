@@ -38,8 +38,8 @@ const Image = ({ info }) => {
       className={styles.image}
       href={info.url}>
       <img src={info.imageUrl}/>
-      <p className={styles.title}>{info.title}</p>
       {info.advertisementType === 'video' ? <VideoPlayIcon /> : null}
+      <p className={styles.title}>{info.title}</p>
     </a>
   );
 };
@@ -47,6 +47,7 @@ const Image = ({ info }) => {
 const AdsBox = ({ adsList }) => {
   return (
     <Carousel
+      autoPlay={false}
       hideDots={true}
       className={styles.container}>
       {

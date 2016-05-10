@@ -22,7 +22,7 @@ app.enable('trust proxy');
 
 // 静态资源
 app.locals.assets = require('./assets.json');
-app.locals.staticBase = isDeveloping ? '' : '//js.moviefan.com.cn';
+app.locals.staticBase = isDeveloping ? '' : '//js.moviefan.com.cn/piaoyou_fe';
 app.locals.reversion = '';
 try {
   app.locals.reversion = fs.readFileSync('./.revision', { encoding: 'utf-8' });

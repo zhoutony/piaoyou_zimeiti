@@ -4,7 +4,9 @@ var styles = require('./styles.css');
 
 const VideoPlayIcon = ({ small }) => {
   return (
-    <i className={[styles.normal, small ? styles.small : ''].join(' ')}></i>
+    <div className={styles.overlay}>
+      <i className={[styles.normal, small ? styles.small : ''].join(' ')}></i>
+    </div>
   );
 };
 
