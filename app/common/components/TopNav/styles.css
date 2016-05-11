@@ -1,6 +1,6 @@
 .container {
   display: flex;
-  justify-content: left;
+  justify-content: space-between;
   font-size: 1rem;
   color: rgb(70, 70, 70);
   background: #eaeaea;

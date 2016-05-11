@@ -51,12 +51,14 @@ const News = ({ news, wxChannel }) => {
           </div>
         </div>
         <div className={styles.infoContainer}>
+          <div className={styles.line}></div>
           <div className={styles.info}>
             <span className={styles.publishName}>{publishName}</span>
             <span>{moment(publishtime, 'YYYY-MM-DD HH:mm:ss').fromNow()}</span>
             <span>阅读 {count}</span>
             {NewTopType ? <span className={styles.tag}>{NewTopType}</span> : null}
           </div>
+          <div className={styles.line}></div>
         </div>
       </div>
     </Link>
