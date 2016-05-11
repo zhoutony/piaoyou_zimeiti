@@ -5,6 +5,7 @@
   color: rgb(70, 70, 70);
   background: #eaeaea;
   flex-wrap: nowrap;
+  overflow-x: auto;
 }
 
 .item {

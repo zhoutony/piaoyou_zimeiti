@@ -2,7 +2,6 @@ import React, {Component, PropTypes} from 'react';
 import ReactSwipe from 'react-swipe';
 
 import Carousel from '../Carousel';
-import VideoDuration from '../VideoDuration';
 import VideoPlayIcon from '../VideoPlayIcon';
 
 import styles from './styles.css';
@@ -34,13 +33,6 @@ class CarouselAds extends Component {
   }
 
   renderCarouselItem(ads) {
-    let additionInfos = [];
-
-    if (ads.advertisementType === 'video') {
-      additionInfos.push(<VideoDuration duration={ads.duration}/>);
-      additionInfos.push(<VideoPlayIcon />);
-    }
-
     return (
       <div
         className={styles.ads}
@@ -50,7 +42,7 @@ class CarouselAds extends Component {
         <img
           className={styles.image}
           src={ads.imageUrl}/>
-        {additionInfos}
+        {ads.advertisementType === 'video' ? <VideoPlayIcon duration={ads.duration}/> : null}
       </div>
     );
   }

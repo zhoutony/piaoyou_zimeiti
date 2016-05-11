@@ -4,24 +4,15 @@ import moment from 'moment';
 
 moment.locale('zh-cn');
 
-import VideoDuration from '../../components/VideoDuration';
 import VideoPlayIcon from '../../components/VideoPlayIcon';
 
 import styles from './styles.css';
 
 const NewsCover = ({ news, image }) => {
-  let videoInfo;
-
-  if (news.newType === 'video') {
-    videoInfo = [];
-    videoInfo.push(<VideoDuration duration={news.videoDuration} />);
-    videoInfo.push(<VideoPlayIcon small={news.showType === 'small'}/>);
-  }
-
   return (
     <div className={styles.cover}>
       <img src={image}/>
-      {videoInfo}
+      {news.newType === 'video' ? <VideoPlayIcon small={news.showType === 'small'} duration={news.videoDuration}/> : null}
     </div>
   );
 };

@@ -7,8 +7,8 @@ const BottomNav = ({ current, wxChannel }) => {
   const cityId = JSON.parse(cookies.get('city') || '{"locationId": 110100}').locationId;
   const items = [
     { id: 'home', label: '推荐', url: '/' },
-    { id: 'movie', label: '购票', url: `/${wxChannel}/${cityId}/filmlist/hot` },
-    { id: 'explore', label: '电影', url: `/${wxChannel}/movies` },
+    { id: 'ticket', label: '购票', url: `/${wxChannel}/${cityId}/filmlist/hot` },
+    { id: 'movies', label: '电影', url: `/${wxChannel}/movies` },
     { id: 'my', label: '我的', url: `/${wxChannel}/my/index` },
   ].map(function(item) {
     let classNames = [styles.item, styles[item.id]];

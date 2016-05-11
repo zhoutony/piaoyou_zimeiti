@@ -48,7 +48,7 @@ class Movies extends Component {
             onChange={(filters) => refreshMoviesNewsList(1, filters)}/>
           {newsList.length ? <NewsList newsList={newsList} wxChannel={wxChannel}/> : null}
         </Refreshable>
-        <BottomNav current='home' wxChannel={wxChannel}/>
+        <BottomNav current='movies' wxChannel={wxChannel}/>
       </div>
     );
   }

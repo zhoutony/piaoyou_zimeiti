@@ -17,14 +17,37 @@
   margin-left: -2.58rem;
   background: url(./icon.png) no-repeat;
   background-size: 100%;
-  border: 1px solid white;
+  border: 1px solid rgba(255, 255, 255, .7);
   border-radius: 100%;
 }
 
 .small {
-  border-color: rgba(255, 255, 255, .5);
   width: 2rem;
   height: 2rem;
   margin-top: -1rem;
   margin-left: -1rem;
+}
+
+.duration {
+  position: absolute;
+  top: 100%;
+  margin-top: 10px;
+  font-size: 10px;
+  color: rgba(255, 255, 255, .7);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.duration::before {
+  content: '';
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background: url(./duration_icon.png);
+  background-size: 100%;
+  border: 1px solid rgba(255, 255, 255, .7);
+  border-radius: 100%;
+  margin-right: 5px;
 }
