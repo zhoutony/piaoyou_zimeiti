@@ -10,13 +10,13 @@ const firstFilters = [
 
 const secondFilters = chunk([
   { value: '喜剧', label: '喜剧' },
-  { value: '动作', label: '动作' },
-  { value: '爱情', label: '爱情' },
-  { value: '恐怖', label: '恐怖' },
   { value: '科幻', label: '科幻' },
-  { value: '动画', label: '动画' },
-  { value: '剧情', label: '剧情' },
   { value: '伦理', label: '伦理' },
+  { value: '战争', label: '战争' },
+  { value: '情感', label: '情感' },
+  { value: '动作', label: '动作' },
+  { value: '悬疑', label: '悬疑' },
+  { value: '动画', label: '动画' },
 ], 4);
 
 const FirstFilter = ({ current, onChange }) => {
