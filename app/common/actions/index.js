@@ -159,3 +159,8 @@ export function loadNews(newsId) {
   };
 }
 
+export function showCompleteNews() {
+  return {
+    type: types.SHOW_COMPLETE_NEWS,
+  };
+}

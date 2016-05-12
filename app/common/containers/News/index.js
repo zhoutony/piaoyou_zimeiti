@@ -3,12 +3,11 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
-import { loadNews } from '../../actions';
+import { loadNews, showCompleteNews } from '../../actions';
 
 import NewsList from '../../components/NewsList';
 import Helper from '../../components/Helper';
 import AdsBox from './AdsBox';
-
 
 import styles from './styles.css';
 
@@ -36,28 +35,17 @@ const Info = ({ newsInfo, wxChannel }) => {
 };
 
 class News extends Component {
-  state = {
-    showMore: false,
-  };
 
-  componentWillMount() {
-    this.checkNews(this.props);
+  componentDidMount() {
+    this.props.loadNews(this.props.params.newsId);
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.checkNews(nextProps);
-  }
-
-  checkNews(props) {
-    const { loadNews, newsInfo, params } = props;
-
-    // 如果还没有新闻数据，或不是要看的新闻。就加载新闻
-    if (!newsInfo || newsInfo.newID !== parseInt(params.newsId, 10)) {
-      loadNews(params.newsId);
-      this.setState({
-        showMore: false,
-      });
+  shouldComponentUpdate(nextProps, nextState) {
+    if (!nextProps.newsId) {
+      this.props.loadNews(nextProps.params.newsId);
     }
+
+    return true;
   }
 
   get wxChannel() {
@@ -65,9 +53,11 @@ class News extends Component {
   }
 
   render() {
+    const { newsInfo } = this.props;
+
     let children;
 
-    if (this.props.newsInfo) {
+    if (newsInfo) {
       children = [
         this.renderTopAdsList(),
         this.renderContent(),
@@ -85,8 +75,7 @@ class News extends Component {
   }
 
   renderContent() {
-    const { newsInfo } = this.props;
-    const { showMore } = this.state;
+    const { newsInfo, isComplete, showCompleteNews } = this.props;
     const { title, content, count, publishID, publishName } = newsInfo;
     const wxChannel = this.wxChannel;
 
@@ -96,9 +85,9 @@ class News extends Component {
         <h2 className={styles.title}>{title}</h2>
         <div
           className={styles.content}
-          style={showMore ? { height: 'auto', maxHeight: 'none' } : {}}
+          style={isComplete ? { height: 'auto', maxHeight: 'none' } : {}}
           dangerouslySetInnerHTML={{ __html: content }} />
-        {showMore ? null : <div className={styles.showMore} onClick={() => this.showMore()}></div>}
+        {isComplete ? null : <div className={styles.showMore} onClick={() => showCompleteNews()}></div>}
         <p className={styles.readCount}>
           阅读：{count}
         </p>
@@ -148,9 +137,11 @@ class News extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  return state.news;
+  const data = state.news;
+  return data.newsId === parseInt(ownProps.params.newsId, 10) ? data : {};
 }
 
 export default connect(mapStateToProps, {
   loadNews,
+  showCompleteNews,
 })(News);

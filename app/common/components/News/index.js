@@ -27,6 +27,11 @@ const News = ({ news, wxChannel }) => {
     contentClassNameList.push(styles.smallContent);
   }
 
+  let imageCovers;
+  if (images && images.length) {
+    imageCovers = <div className={styles.covers}>{images.map((image) => <NewsCover news={news} image={image} />)}</div>;
+  }
+
   return (
     <Link
       to={`/${wxChannel}/movienews/${publishID}/${newID}`}
@@ -38,9 +43,7 @@ const News = ({ news, wxChannel }) => {
       }}>
       <div className={styles.container}>
         <div className={contentClassNameList.join(' ')}>
-          <div className={styles.covers}>
-            {images.map((image) => <NewsCover news={news} image={image} />)}
-          </div>
+          {imageCovers}
           <div className={styles.desc}>
             <h2 className={styles.title}>
               {title}

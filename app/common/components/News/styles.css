@@ -14,6 +14,7 @@
 .covers {
   flex: 1 100%;
   display: flex;
+  margin-bottom: 1rem;
 }
 
 .cover {
@@ -39,7 +40,6 @@
 .desc h2 {
   font-size: 1.33rem;
   color: #231815;
-  margin-top: 1rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -129,6 +129,7 @@
 .smallContent .covers {
   flex: 1 0;
   order: 2;
+  margin-bottom: 0;
 }
 
 .smallContent .cover {

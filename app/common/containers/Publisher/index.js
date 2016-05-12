@@ -42,7 +42,6 @@ class Publisher extends Component {
       params,
     } = this.props;
 
-
     let children;
 
     if (publisher) {
