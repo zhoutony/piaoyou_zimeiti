@@ -53,7 +53,7 @@ module.exports = {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract(
           'style',
-          'css?modules&importLoaders=2&localIdentName=[name]_[local]__[hash:base64:5]!autoprefixer?browsers=last 2 version'
+          'css?modules&importLoaders=2&localIdentName=[name]_[local]__[hash:base64:5]!autoprefixer?{browsers:["> 1%", "last 2 versions", "iOS >= 7", "Android >= 4"]}'
         ),
       },
       { test: /\.(jpg|png|gif)$/, loader: 'url-loader?limit=10240' },
