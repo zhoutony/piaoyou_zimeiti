@@ -48,7 +48,7 @@ function isLoggedIn(req, res, next) {
   var build_weixin_url = function(publicsignalshort) {
     var app_id = getAppId(publicsignalshort).appId;
     var open_wx_host = 'https://open.weixin.qq.com';
-    var callback_host = 'http://moviefan.com.cn';
+    var callback_host = 'http://new.moviefan.com.cn';
 
     if (req.auth_debug) {
       open_wx_host = '/mock_openwx';
