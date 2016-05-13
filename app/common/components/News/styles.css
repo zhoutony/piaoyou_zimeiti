@@ -43,7 +43,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  padding: 0 .5rem;
+  padding: 0 1rem;
 }
 
 .desc p {
@@ -53,7 +53,7 @@
   max-height: 3rem;
   overflow: hidden;
   text-overflow: ellipsis;
-  padding: 0 1.5rem;
+  padding: 0 2.5rem;
   -webkit-line-clamp: 2;
   display: -webkit-box;
   -webkit-box-orient: vertical;

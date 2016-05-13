@@ -11,8 +11,8 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 5.17rem;
-  height: 5.17rem;
+  width: 4.6rem;
+  height: 4.6rem;
   margin-top: -2.58rem;
   margin-left: -2.58rem;
   background: url(./icon.png) no-repeat;
@@ -31,7 +31,7 @@
 .duration {
   position: absolute;
   top: 100%;
-  margin-top: 10px;
+  margin-top: 15px;
   font-size: 10px;
   color: rgba(255, 255, 255, .7);
   width: 100%;
@@ -43,8 +43,8 @@
 .duration::before {
   content: '';
   display: inline-block;
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   background: url(./duration_icon.png);
   background-size: 100%;
   border: 1px solid rgba(255, 255, 255, .7);
