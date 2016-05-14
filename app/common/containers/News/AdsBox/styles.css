@@ -46,19 +46,21 @@
   flex: 1 0;
   padding: 0 .83rem;
   color: #888;
+  font-size: 1rem;
 }
- 
+
 .movie li:first-child{
   font-size:1.33rem;
   height:1.4rem;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  line-height: 1.4;
+  line-height: 1.4rem;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   margin-bottom:0.5rem;
 }
+
 .movie li:nth-child(3){
   height:1.4rem;
   overflow: hidden;
@@ -69,7 +71,6 @@
   -webkit-box-orient: vertical;
   margin-bottom:0.2rem;
 }
- 
 
 .buy {
   width: 3.6rem;
