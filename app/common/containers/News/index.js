@@ -9,7 +9,6 @@ import NewsList from '../../components/NewsList';
 import Helper from '../../components/Helper';
 import AdsBox from './AdsBox';
 
-
 import styles from './styles.css';
 
 const Info = ({ newsInfo, wxChannel }) => {

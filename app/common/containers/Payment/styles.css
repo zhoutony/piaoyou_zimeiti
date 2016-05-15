@@ -1,0 +1,129 @@
+.container {}
+
+.ticketInfo {
+  display: flex;
+  padding: 1.33rem 1.67rem 1.25rem;
+  border-bottom: 2px solid rgba(0, 150, 141, .3);
+}
+
+.ticketInfo .info {
+  flex: 1 0;
+}
+
+.ticketInfo .info h2 {
+  font-size: 1.17rem;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+.ticketInfo .info p {
+  color: #707070;
+  font-size: .92rem;
+  line-height: 1.8;
+}
+
+.ticketInfo .changeSeat {
+  display: block;
+  width: 6.25rem;
+  height: 2rem;
+  color: #fff;
+  background: #00968d;
+  text-align: center;
+  line-height: 2rem;
+  font-size: 1rem;
+  border-radius: 8.33rem;
+  margin-top: .16rem;
+}
+
+.paymentTool > li {
+  padding-left: 1.67rem;
+  padding-right: 1.67rem;
+  padding-top: 1.17rem;
+  padding-bottom: 1.17rem;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px dashed rgba(221, 221, 221, .4);
+}
+
+.paymentTool > li::before {
+  color: #00968d;
+  font-size: 1.17rem;
+  flex: 1 0;
+}
+
+.paymentTool .selected {
+  padding-top: .83rem;
+  padding-bottom: .83rem;
+  align-items: flex-start;
+}
+
+.selected > span {
+  font-size: 1.67rem;
+  line-height: 1.2;
+  color: #00958E;
+}
+
+.selected > ul {
+  flex: 1 0;
+  display: flex;
+}
+
+.selected li {
+  font-size: .91rem;
+  color: #fff;
+  background: url(./images/lock.png) no-repeat top right #00968f;
+  background-size: .42rem auto;
+  padding: .08rem .5rem;
+  margin-right: .08rem;
+}
+
+.redPacket::before {
+  content: '红包';
+}
+
+.cardPacket::before {
+  content: '票友包';
+}
+
+.redPacket,
+.cardPacket {
+  font-size: .92rem;
+  color: #c8c8c8;
+}
+
+.paymentTool .mobile::before {
+  content: '手机号码';
+  flex: 0 auto;
+  margin-right: .83rem;
+}
+
+.mobile {
+  font-size: 1.33rem;
+  color: #aaa;
+}
+
+.remain::before {
+  content: '还需支付';
+}
+
+.remain {
+  color: #f69601;
+  font-weight: 400;
+  font-size: 1.67rem;
+  line-height: 1.4;
+}
+
+.paymentTool .remain {
+  border-bottom: 1px solid rgba(216, 216, 216, .3);
+}
+
+.helpInfo {
+  padding: 1rem 0;
+  text-align: center;
+}
+
+.helpInfo a {
+  color: #00968d;
+  font-size: .9rem;
+  line-height: 1.83;
+}

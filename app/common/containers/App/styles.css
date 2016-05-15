@@ -104,7 +104,7 @@ canvas {
 }
 
 body, button, input, select, textarea {
-  font: 12px/1.5 arial, simsun;
+  font: 12px/1.5;
 }
 
 input, select, textarea {
