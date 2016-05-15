@@ -56,7 +56,8 @@ module.exports = {
           'css?modules&importLoaders=2&localIdentName=[name]_[local]__[hash:base64:5]!autoprefixer?{browsers:["> 1%", "last 2 versions", "iOS >= 7", "Android >= 4"]}'
         ),
       },
-      { test: /\.(jpg|png|gif)$/, loader: 'url-loader?limit=10240' },
+      { test: /\.ttf$/, loader: "url-loader?limit=1024&mimetype=application/octet-stream" },
+      { test: /\.(jpg|png|gif)$/, loader: 'url-loader?limit=1024' },
     ],
   },
 };

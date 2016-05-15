@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import { Dialog, Toast } from 'react-weui';
+import merge from 'lodash/merge';
 
 import TicketInfo from './TicketInfo';
 import PaymentTool from './PaymentTool';
@@ -8,15 +10,18 @@ import Helper from '../../components/Helper';
 
 import styles from './styles.css';
 
+const { Alert } = Dialog;
+
 class Payment extends Component {
   state = {
     selectedRedPacket: 0,
     selectedCardPacket: 0,
+    message: '',
   };
 
   render() {
-    const { movie, cinema, showtime, seats, mobile, lock } = this.props;
-    const { selectedRedPacket, selectedCardPacket } = this.state;
+    const { movie, cinema, showtime, seats, mobile, lockInfo, submitted } = this.props;
+    const { selectedRedPacket, selectedCardPacket, message } = this.state;
 
     return (
       <div className={styles.container}>
@@ -27,14 +32,37 @@ class Payment extends Component {
           mobile={mobile}
           selectedCardPacket={selectedCardPacket}
           selectedRedPacket={selectedRedPacket} />
-        <PaymentSubmit endTime={new Date(lock.playEndTime).getTime()} />
+        <PaymentSubmit
+          endTime={new Date(lockInfo.playEndTime).getTime()}
+          onSubmit={() => this.handleSubmit()}
+          onExpire={() => this.handleExpire()}
+          submitted={submitted} />
         <div className={styles.helpInfo}>
           <a href="tel:4008-123-867">客服电话：4008-123-867</a>
           <p>电影票友服务由北京亚视联合在线科技有限公司提供</p>
         </div>
+        <Alert
+          show={!!message}
+          title="提示"
+          buttons={[{
+            label: '好的',
+            onClick: () => {location.href = '/';}
+          },]}>
+            {message}
+        </Alert>
         <Helper />
       </div>
     );
+  }
+
+  handleSubmit() {
+
+  }
+
+  handleExpire() {
+    this.setState(merge({}, this.state, {
+      message: '未在10分钟内完成支付，所选座位已被取消',
+    }));
   }
 }
 
@@ -53,8 +81,10 @@ function mapStateToProps(state, ownProps) {
   // const mobile = localStorage.getItem('tel');
   const mobile = '18612258193';
 
-  // const lock = JSON.parse(localStorage.getItem(`lockseats_${showtime.showtimeID}`) || '{}');
-  const lock = {"orderID":"4978","lockTime":5,"movieName":null,"version":null,"showTime":null,"cinemaID":0,"seatIDs":null,"seatNames":null,"playEndTime":"2016/5/15 12:02:47","movieID":0};
+  // const lockInfo = JSON.parse(localStorage.getItem(`lockseats_${showtime.showtimeID}`) || '{}');
+  const lockInfo = {"orderID":"4978","lockTime":5,"movieName":null,"version":null,"showTime":null,"cinemaID":0,"seatIDs":null,"seatNames":null,"playEndTime":"2016/5/15 18:10:00","movieID":0};
+
+  const submitted = false;
 
   return {
     movie,
@@ -62,7 +92,8 @@ function mapStateToProps(state, ownProps) {
     showtime,
     mobile,
     seats,
-    lock,
+    lockInfo,
+    submitted,
   };
 }
 

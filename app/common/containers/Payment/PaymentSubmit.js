@@ -1,14 +1,16 @@
 import React, {Component} from 'react';
 import moment from 'moment';
+import classNames from 'classnames';
 
 import styles from './styles.css';
+import icons from '../../fonts/hello/styles.css';
 
 function fillZero(number) {
   return ('0' + number).slice(-2);
 }
 
 function formatDuration(duration) {
-  const durationObj = moment.duration(duration, 'seconds');
+  const durationObj = moment.duration(duration, 'milliseconds');
   const minutes = durationObj.minutes();
   const seconds = durationObj.seconds();
 
@@ -17,29 +19,35 @@ function formatDuration(duration) {
 
 class PaymentSubmit extends Component{
   constructor(props) {
-    this.setState({
-      remainTime: new Date().getTime() - props.endTime,
-    });
-    this.countdown();
-
     super(props);
+    const { endTime } = props;
+
+    this.state = {
+      endTime,
+    };
+  }
+
+  componentWillMount() {
+    this.countdown();
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      remainTime: new Date().getTime() - nextProps.endTime,
+      endTime: nextProps.endTime,
     });
-
-    super(nextProps);
   }
 
   countdown() {
-    const remainTime = this.state.remainTime - 1e3;
+    const { endTime, onExpire } = this.props;
+    const current = new Date().getTime();
+    const remainTime = endTime - current;
 
-    if (endTime > 0) {
+    if (remainTime > 0) {
       this.setState({
-        remainTime,
+        flush: current,
       });
+    } else {
+      onExpire();
     }
 
     this.countdownTime = setTimeout(() => this.countdown(), 1e3);
@@ -50,17 +58,22 @@ class PaymentSubmit extends Component{
   }
 
   render() {
-    const { remainTime } = this.state;
+    const { onSubmit, submitted } = this.props;
+    const { endTime } = this.state;
+    const remainTime = endTime - new Date().getTime();
 
     return (
       <div className={styles.paymentSubmit}>
         <p className={styles.warn}>
-          <span>不支持退款</span>
-          <span>不支持更换场次</span>
+          <span className={icons['icon-cancel-circled2']}>不支持退款</span>
+          <span className={icons['icon-cancel-circled2']}>不支持更换场次</span>
         </p>
-        <button className={styles.submit}>立即支付</button>
-        <p classname={styles.remainTime}>
-          支付剩余时间&nbsp;&nbsp;{remainTime > 0 ? formatDuration(remainTime) : '支付时间已过期'}
+        <span
+          className={classNames({ [styles.submit]: true, [styles.submitted]: submitted })}
+          onClick={onSubmit}>{submitted ? '正在支付，请稍后...' : '立即支付'}</span>
+        <p className={styles.remainTime}>
+          支付剩余时间&nbsp;&nbsp;
+          <span>{remainTime > 0 ? formatDuration(remainTime) : '支付时间已过期'}</span>
         </p>
       </div>
     );
