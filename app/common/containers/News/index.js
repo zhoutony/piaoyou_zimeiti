@@ -25,9 +25,6 @@ const Info = ({ newsInfo, wxChannel }) => {
         <span>{publishName}<br/>{publishTimeStr}</span>
       </div>
       </Link>
-      <div className={styles.platform}>
-        <Link to='/'>共享平台＋</Link>
-      </div>
       <div className={styles.toolbox}>
         <i className={styles.share}></i>
       </div>
