@@ -7,6 +7,7 @@ const initState = {
   newsLoading: false,
   publisher: {},
   publisherId: null,
+  shareInfo: null,
 };
 
 export default function publisher(state = initState, action) {
@@ -14,7 +15,7 @@ export default function publisher(state = initState, action) {
 
   switch (action.type) {
     case types.LOAD_PUBLISHER_NEWSLIST_SUCCESS:
-      const { news, sourceInfo } = action.response.data;
+      const { news, sourceInfo, shareInfo } = action.response.data;
 
       return merge({}, state, {
         newsList: state.newsList.concat(news),
@@ -22,6 +23,7 @@ export default function publisher(state = initState, action) {
         newsLoading: false,
         publisher: sourceInfo,
         isSubscribed: sourceInfo.isSubscribe === 'true',
+        shareInfo,
       });
     case types.LOAD_PUBLISHER_NEWSLIST_REQUEST:
       state = state.publisherId === publisherId ? state : initState;

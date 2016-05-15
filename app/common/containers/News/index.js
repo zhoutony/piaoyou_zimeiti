@@ -2,13 +2,14 @@ import React, {Component, PropTypes} from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import merge from 'lodash/merge';
 
 import { loadNews } from '../../actions';
+import { share } from '../../utils/wxBridge';
 
 import NewsList from '../../components/NewsList';
 import Helper from '../../components/Helper';
 import AdsBox from './AdsBox';
-
 
 import styles from './styles.css';
 
@@ -145,6 +146,16 @@ class News extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
+  const { shareInfo, newsInfo } = state.news;
+
+  if (shareInfo) {
+    share(merge({}, shareInfo, {
+      wxChannel: ownProps.params.wxChannel || 'dypy',
+      sourceId: newsInfo.newID,
+      shareType: 2,
+    }));
+  }
+
   return state.news;
 }
 

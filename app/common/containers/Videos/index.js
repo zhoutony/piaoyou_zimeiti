@@ -1,7 +1,9 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
+import merge from 'lodash/merge';
 
 import { loadVideosAdsList, loadVideosNewsList } from '../../actions';
+import { share } from '../../utils/wxBridge';
 
 import TopNav from '../../components/TopNav';
 import CarouselAds from '../../components/CarouselAds';
@@ -50,6 +52,16 @@ class Videos extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
+  const { shareInfo } = state.videos;
+
+  if (shareInfo) {
+    share(merge({}, shareInfo, {
+      wxChannel: ownProps.params.wxChannel || 'dypy',
+      sourceId: 0,
+      shareType: 1000,
+    }));
+  }
+
   return state.videos;
 }
 

@@ -6,6 +6,7 @@ const initState = {
   newsList: [],
   newsPage: 0,
   newsLoading: false,
+  shareInfo: null,
 };
 
 export default function newsList(state = initState, action) {
@@ -27,6 +28,7 @@ export default function newsList(state = initState, action) {
     case types.LOAD_VIDEOS_ADSLIST_SUCCESS:
       return merge({}, state, {
         adsList: action.response.data.advertisements,
+        shareInfo: action.response.data.shareInfo,
       });
     default:
       return state;
