@@ -2,8 +2,10 @@ import React, {Component, PropTypes} from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import merge from 'lodash/merge';
 
 import { loadNews } from '../../actions';
+import { share } from '../../utils/wxBridge';
 
 import NewsList from '../../components/NewsList';
 import Helper from '../../components/Helper';
@@ -24,9 +26,6 @@ const Info = ({ newsInfo, wxChannel }) => {
         <span>{publishName}<br/>{publishTimeStr}</span>
       </div>
       </Link>
-      <div className={styles.platform}>
-        <Link to='/'>共享平台＋</Link>
-      </div>
       <div className={styles.toolbox}>
         <i className={styles.share}></i>
       </div>
@@ -147,6 +146,16 @@ class News extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
+  const { shareInfo, newsInfo } = state.news;
+
+  if (shareInfo) {
+    share(merge({}, shareInfo, {
+      wxChannel: ownProps.params.wxChannel || 'dypy',
+      sourceId: newsInfo.newID,
+      shareType: 2,
+    }));
+  }
+
   return state.news;
 }
 

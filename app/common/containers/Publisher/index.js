@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import merge from 'lodash/merge';
 
 import { loadPublisherNewsList, toggleSubscribePublisher } from '../../actions';
+import { share } from '../../utils/wxBridge';
 
 import styles from './styles.css';
 
@@ -71,6 +73,16 @@ class Publisher extends Component {
 };
 
 function mapStateToProps(state, ownProps) {
+  const { shareInfo, publisherId } = state.publisher;
+
+  if (shareInfo) {
+    share(merge({}, shareInfo, {
+      wxChannel: ownProps.params.wxChannel || 'dypy',
+      sourceId: publisherId,
+      shareType: 3,
+    }));
+  }
+
   const data = state.publisher;
   return data.publisherId === ownProps.params.publisherId ? data : {};
 }

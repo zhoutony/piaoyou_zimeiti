@@ -7,6 +7,7 @@ const initState = {
   newsPage: 0,
   newsLoading: false,
   filters: [0, '喜剧'],
+  shareInfo: null,
 };
 
 function eqaulFilters(a, b) {
@@ -42,6 +43,7 @@ export default function newsList(state = initState, action) {
     case types.LOAD_MOVIES_ADSLIST_SUCCESS:
       return merge({}, state, {
         adsList: action.response.data.advertisements,
+        shareInfo: action.response.data.shareInfo,
       });
     default:
       return state;

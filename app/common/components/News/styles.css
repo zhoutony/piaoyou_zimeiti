@@ -142,9 +142,10 @@
 
 .smallContent .desc h2 {
   margin-top: 0;
-  text-overflow: initial;
-  overflow: auto;
   white-space: initial;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
 }
 
 .smallContent .desc h2,
