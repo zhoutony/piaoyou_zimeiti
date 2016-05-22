@@ -1,0 +1,33 @@
+.list {
+
+}
+
+.item {
+  margin-top: .83rem;
+  border: 1px solid #7fbbb9;
+  background: #fff;
+  border-radius: 1.67rem;
+  padding-bottom: .83rem;
+}
+
+.item h3 {
+  border-bottom: 1px dotted #898989;
+  margin: 0 .625rem .83rem;
+  padding: .83rem;
+  color: #898989;
+  font-size: 1.67rem;
+  line-height: 2;
+  font-weight: 700;
+}
+
+.item h3 span {
+  font-weight: normal;
+  color: #00968d;
+}
+
+.item p {
+  color: #898989;
+  font-size: .83rem;
+  line-height: 1.4;
+  margin: .25rem 1.46rem 0;
+}

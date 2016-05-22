@@ -159,3 +159,20 @@ export function loadNews(newsId) {
   };
 }
 
+// 支付订单
+export function getPayParams(orderId, redPacketId, cardPacketId, wxChannel) {
+  return {
+    [types.CALL_API]: {
+      types: [types.GET_PAY_PARAMS_REQUEST, types.GET_PAY_PARAMS_SUCCESS, types.GET_PAY_PARAMS_FAILURE],
+      endpoint: 'QueryWeixinPlayParam',
+      params: {
+        orderID: orderId,
+        openID: cookies.get('openids') || '',
+        wxtype: wxChannel,
+        redEnvelopeID: redPacketId || '',
+        piaoyouCardID: cardPacketId || '',
+      },
+    },
+  };
+}
+

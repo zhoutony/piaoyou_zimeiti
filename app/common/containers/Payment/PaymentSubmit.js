@@ -58,7 +58,7 @@ class PaymentSubmit extends Component{
   }
 
   render() {
-    const { onSubmit, submitted } = this.props;
+    const { onSubmit, submitting } = this.props;
     const { endTime } = this.state;
     const remainTime = endTime - new Date().getTime();
 
@@ -69,8 +69,8 @@ class PaymentSubmit extends Component{
           <span className={icons['icon-cancel-circled2']}>不支持更换场次</span>
         </p>
         <span
-          className={classNames({ [styles.submit]: true, [styles.submitted]: submitted })}
-          onClick={onSubmit}>{submitted ? '正在支付，请稍后...' : '立即支付'}</span>
+          className={classNames({ [styles.submit]: true, [styles.submitting]: submitting })}
+          onClick={onSubmit}>{submitting ? '正在支付，请稍后...' : '立即支付'}</span>
         <p className={styles.remainTime}>
           支付剩余时间&nbsp;&nbsp;
           <span>{remainTime > 0 ? formatDuration(remainTime) : '支付时间已过期'}</span>

@@ -91,6 +91,11 @@
   color: #c8c8c8;
 }
 
+.hasPacket {
+  font-size: 1.17rem;
+  color: #f69601;
+}
+
 .paymentTool .mobile::before {
   content: '手机号码';
   flex: 0 auto;
@@ -144,7 +149,7 @@
   margin: 1.25rem 0 .25rem;
 }
 
-.submitted {
+.submitting {
   background: rgb(204, 204, 204);
 }
 
