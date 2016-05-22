@@ -1,0 +1,35 @@
+mixin detail
+  dl.redinfo(v-if="piao")
+    dt 卡包规则
+    dd
+      h2 金额：{{ piao.money }}元
+    ul
+      li 使用范围
+      li 影片：{{ piao.movieName }}
+      li 有效期：{{ piao.endTime }}
+      li 版本：{{ piao.Versions }}
+      li 影院：{{ piao.cinemaName }}
+      li 说明：{{ piao.remarks }}
+    h2 使用规则
+    ol
+      li {{ piao.rule }}
+    a.btn_back(v-on:click="showList()") 返回
+
+div#piaoModal
+  +detail
+  div.orderbox(v-else)
+    dt
+      a
+        | 票友卡
+    dd
+      div.cardpop
+        ul.cardlist
+          li(
+            v-for="piao in piaoList"
+            v-on:click="showDetail(piao.piaoyouCardID)"
+          )
+            div.cardtxt
+              b 金额：
+              span ￥{{ piao.remainder }}
+            p 票友卡：{{ piao.denomination }}元
+            p 有效期：{{ piao.startTime }}至{{ piao.endTime }}

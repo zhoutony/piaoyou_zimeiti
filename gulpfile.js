@@ -7,7 +7,7 @@ var appWebpackDevelopmentConfig = require('./app/webpack.config.development');
 var appWebpackProductionConfig = require('./app/webpack.config.production');
 
 var staticGlob = ['static/**/*.*', '!static/**/*.js'];
-var scriptGlob = ['static/**/*.js'];
+var scriptGlob = ['static/**/*.js', 'static/**/*.jade'];
 var appGlob = ['app/**/*.js', 'app/**/*.css'];
 
 gulp.task('static', function() {
@@ -28,7 +28,7 @@ gulp.task('app-webpack', function(callback) {
 gulp.task('watch', function() {
   gulp.watch(staticGlob, ['static']);
   gulp.watch(scriptGlob, ['webpack']);
-  gulp.watch(appGlob, ['app-webpack']);
+  // gulp.watch(appGlob, ['app-webpack']);
 });
 
 gulp.task('webpack-production', function(callback) {
@@ -41,5 +41,5 @@ gulp.task('app-webpack-production', function(callback) {
   compiler.run(callback);
 });
 
-gulp.task('default', ['static', 'webpack', 'app-webpack', 'watch']);
+gulp.task('default', ['static', 'webpack', 'watch']);
 gulp.task('release', ['static', 'webpack-production']);

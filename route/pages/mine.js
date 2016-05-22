@@ -146,20 +146,31 @@ app.get(['/my/mypiao'], function(req, res) {
     }
   };
 
-  var renderData = {
-    data: {}
-  };
-
   // console.log(orders.orderID );
   // res.render('wecinema/cinemaorder', renderData);
   model.fetchDataFromBack(options, function(err, data) {
-    // console.log(data);
-    renderData.data.err = err;
-    if (!err && data && data.piaoyouCards) {
-      renderData.data = data;
-    }
+    data = data || {};
+    data.err = err;
 
-    res.render('wecinema/mypiao', renderData);
+    res.json(data);
+  });
+});
+
+app.get(['/my/mypiao/:piaoId'], function(req, res) {
+  var apiURL = '/queryPiaoyouCard.aspx';
+
+  var options = {
+    url: apiURL,
+    args: {
+      piaoyouCardID: req.params.piaoId
+    }
+  };
+
+  model.fetchDataFromBack(options, function(err, data) {
+    data = data || {};
+    data.err = err;
+
+    res.json(data);
   });
 });
 
@@ -189,6 +200,24 @@ app.get(['/my/myredbag'], function(req, res) {
 
   // console.log(orders.orderID );
   // res.render('wecinema/cinemaorder', renderData);
+  model.fetchDataFromBack(options, function(err, data) {
+    data = data || {};
+    data.err = err;
+
+    res.json(data);
+  });
+});
+
+app.get(['/my/myredbag/:redBagId'], function(req, res) {
+  var apiURL = '/queryRedEnvelope.aspx';
+
+  var options = {
+    url: apiURL,
+    args: {
+      redEnvelopeID: req.params.redBagId
+    }
+  };
+
   model.fetchDataFromBack(options, function(err, data) {
     data = data || {};
     data.err = err;
