@@ -65,7 +65,7 @@ function defaultCallback(wxChannel, sourceId, shareType, shareObj) {
 
 verif(0, false);
 
-//分享
+// 分享
 export function share(param) {
   const {
     title = '电影票友 --人人娱乐 人人收益 自媒体共享平台',
@@ -129,5 +129,18 @@ export function share(param) {
       success: (res) => callback('appmessage'),
       cancel: (res) => {},
     });
+  });
+}
+
+// 支付
+export function pay(param, callback) {
+  window.WeixinJSBridge.invoke('getBrandWCPayRequest', param, function (res) {
+    if (res.err_msg === 'get_brand_wcpay_request:ok' || res.err_msg === 'get_brand_wcpay_request:finished') {
+      callback()
+    } else if (res.err_msg === 'system:access_denied') {
+      callback('支付请求被拒绝');
+    } else if (res.err_msg !== 'get_brand_wcpay_request:cancel') {
+      callback('您尚未支付成功，请重新支付');
+    }
   });
 }

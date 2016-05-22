@@ -5,7 +5,7 @@
   font-style: normal;
 }
 
-[class^="icon-"]:before, [class*=" icon-"]:before {
+.icon {
   font-family:"fontello" !important;
   font-size:1rem;
   font-style:normal;

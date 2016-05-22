@@ -65,8 +65,8 @@ class PaymentSubmit extends Component{
     return (
       <div className={styles.paymentSubmit}>
         <p className={styles.warn}>
-          <span className={icons['icon-cancel-circled2']}>不支持退款</span>
-          <span className={icons['icon-cancel-circled2']}>不支持更换场次</span>
+          <span className={[icons.icon, icons['icon-cancel-circled2']].join(' ')}>不支持退款</span>
+          <span className={[icons.icon, icons['icon-cancel-circled2']].join(' ')}>不支持更换场次</span>
         </p>
         <span
           className={classNames({ [styles.submit]: true, [styles.submitting]: submitting })}

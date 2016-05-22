@@ -6,7 +6,7 @@ import news from './news';
 import videos from './videos';
 import movies from './movies';
 import publisher from './publisher';
-import payParams from './payParams';
+import payParam from './payParam';
 
 const rootReducer = combineReducers({
   home,
@@ -15,7 +15,7 @@ const rootReducer = combineReducers({
   movies,
   routing,
   publisher,
-  payParams,
+  payParam,
 });
 
 export default rootReducer;

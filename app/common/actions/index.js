@@ -160,10 +160,11 @@ export function loadNews(newsId) {
 }
 
 // 支付订单
-export function getPayParams(orderId, redPacketId, cardPacketId, wxChannel) {
+export function getPayParam(orderId, redPacketId, cardPacketId, wxChannel) {
   return {
+    orderId,
     [types.CALL_API]: {
-      types: [types.GET_PAY_PARAMS_REQUEST, types.GET_PAY_PARAMS_SUCCESS, types.GET_PAY_PARAMS_FAILURE],
+      types: [types.GET_PAY_PARAM_REQUEST, types.GET_PAY_PARAM_SUCCESS, types.GET_PAY_PARAM_FAILURE],
       endpoint: 'QueryWeixinPlayParam',
       params: {
         orderID: orderId,
