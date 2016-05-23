@@ -43,7 +43,7 @@ app.route('/oauth2/toget').get(function(req, res) {
   var apiURL = '/queryWeixinBaseConfigInfo.aspx';
 
   var options = {
-    uri: apiURL,
+    url: apiURL,
     args: {}
   };
 
