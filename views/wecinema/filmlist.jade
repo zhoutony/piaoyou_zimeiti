@@ -52,6 +52,8 @@ block prepend body
                   a(class="#{redbagClass}")
                     i.ico_redbag
                     span 邀红包
+              if (movie.MinPrice)
+                span.minPrice #{(movie.MinPrice/100).toFixed(2)}
     div.navtool
       ul.flexbox
         li.flex
