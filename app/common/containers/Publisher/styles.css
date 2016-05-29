@@ -57,3 +57,10 @@
   font-weight: 400;
   margin-top: .3rem;
 }
+
+.intro {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}

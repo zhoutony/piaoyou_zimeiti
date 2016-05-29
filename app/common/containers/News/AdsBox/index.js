@@ -6,7 +6,7 @@ import VideoPlayIcon from '../../../components/VideoPlayIcon';
 import Carousel from '../../../components/Carousel';
 
 const Ticket = ({ movie }) => {
-  const { director, actors, releaseTime, filmLength, intro, movieID } = movie;
+  const { director, actors, releaseTime, filmLength, intro, movieID, MinPrice } = movie;
   const infos = [
     movie.movieNameCN,
     `导演：${director}`,
@@ -27,7 +27,10 @@ const Ticket = ({ movie }) => {
       <ul>
         {infos.map((info) => <li>{info}</li>)}
       </ul>
-      <span className={styles.buy}>购票</span>
+      <span className={styles.buy}>
+        { MinPrice ? <span className={styles.minPrice}>¥{(MinPrice/100).toFixed(2)}</span> : null }
+        购票
+      </span>
     </a>
   );
 };

@@ -75,6 +75,7 @@
 .buy {
   width: 3.6rem;
   height: 5.1rem;
+  position: relative;
   background: url(./buy_icon.png);
   background-size: 100%;
   color: #fff;
@@ -83,4 +84,24 @@
   align-self: flex-end;
   margin-bottom: -1.4rem;
   margin-right:-8px;
+}
+
+.minPrice {
+  position: absolute;
+  right: 0;
+  bottom: 110%;
+  color: #F29600;
+  font-size: 1rem;
+  line-height: 1;
+  text-align: center;
+  min-width: 100%;
+}
+
+.minPrice::after {
+  content: '起';
+  position: absolute;
+  left: 100%;
+  bottom: 0;
+  color: #666;
+  font-size: .42rem;
 }
