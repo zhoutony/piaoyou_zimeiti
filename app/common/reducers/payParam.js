@@ -2,12 +2,13 @@ import merge from 'lodash/merge';
 import * as types from '../constants';
 
 export default function payParam(state = {}, action) {
-  const { orderId, error, response, type } = action;
+  const { orderId, channel, error, response, type } = action;
 
   switch (type) {
     case types.GET_PAY_PARAM_REQUEST:
       return {
         orderId,
+        channel,
         submitting: true,
       };
     case types.GET_PAY_PARAM_SUCCESS:
@@ -16,6 +17,7 @@ export default function payParam(state = {}, action) {
       return merge({}, state, {
         data,
         success,
+        channel,
         state: parseInt(orderState, 10),
         submitting: false,
         error: errorInfo,
@@ -23,6 +25,7 @@ export default function payParam(state = {}, action) {
     case types.GET_PAY_PARAM_FAILURE:
       return {
         orderId,
+        channel,
         submitting: false,
         error,
       };

@@ -4,7 +4,7 @@ import { Dialog, Toast } from 'react-weui';
 import merge from 'lodash/merge';
 
 import { getPayParam } from '../../actions';
-import { pay } from '../../utils/wxBridge';
+import { pay as weixinPay } from '../../utils/wxBridge';
 
 import TicketInfo from './TicketInfo';
 import PaymentTool from './PaymentTool';
@@ -60,7 +60,7 @@ class Payment extends Component {
           selectedRedPacket={selectedRedPacket} />
         <PaymentSubmit
           endTime={new Date(lockInfo.playEndTime).getTime()}
-          onSubmit={() => this.handleSubmit()}
+          onSubmit={channel => this.handleSubmit(channel)}
           onExpire={() => this.handleExpire()}
           submitting={payParam.submitting} />
         <div className={styles.helpInfo}>
@@ -104,22 +104,27 @@ class Payment extends Component {
   }
 
   pay(payParam) {
-    const { orderId, data, success, state, error } = payParam;
+    const { orderId, data, success, state, error, channel } = payParam;
 
     if (data && success) {
-      // 微信支付
-      pay(data, (error) => {
-        if (error) {
-          this.setState(merge({}, this.state, {
-            message: error,
-          }));
-        } else {
-          location.href = `/${this.wxChannel}/pay/orderwait/${orderId}`;
-        }
-      });
+
+      if (channel === 'weixin') {
+        // 微信支付
+        weixinPay(data, error => {
+          if (error) {
+            this.setState(merge({}, this.state, {
+              message: error,
+            }));
+          } else {
+            location.href = `/${this.wxChannel}/pay/orderwait/${orderId}`;
+          }
+        });
+      } else if ( channel === 'huafei') {
+        location.href = `/${this.wxChannel}/pay/orderwait/${orderId}`;
+      }
     } else if (state === 0) {
       setTimeout(() => {
-        this.handleSubmit();
+        this.handleSubmit(channel);
       }, .5e3);
     } else if (error) {
       this.setState(merge({}, this.state, {
@@ -128,11 +133,11 @@ class Payment extends Component {
     }
   }
 
-  handleSubmit() {
+  handleSubmit(channel) {
     const { lockInfo, getPayParam } = this.props;
     const { selectedRedPacketId, selectedCardPacketId } = this.state;
 
-    getPayParam(lockInfo.orderID, selectedRedPacketId, selectedCardPacketId, this.wxChannel);
+    getPayParam(channel, lockInfo.orderID, selectedRedPacketId, selectedCardPacketId, this.wxChannel);
   }
 
   handleExpire() {

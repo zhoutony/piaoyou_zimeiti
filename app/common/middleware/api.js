@@ -37,7 +37,7 @@ export default store => next => action => {
   const [requestType, successType, failureType] = types;
   next(actionWith({ type: requestType }));
 
-  return fetch(`http://weiticket.com:8088/${endpoint}.aspx?${$.param(params)}`)
+  return fetch(`http://weiticket.com:8088/${endpoint}?${$.param(params)}`)
     .then(response => response.json())
     .then(response => response.success ? response : new Error(response.errorInfo))
     .then(

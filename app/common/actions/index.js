@@ -6,7 +6,7 @@ export function loadHomeAdsList(wxChannel) {
   return {
     [types.CALL_API]: {
       types: [types.LOAD_HOME_ADSLIST_REQUEST, types.LOAD_HOME_ADSLIST_SUCCESS, types.LOAD_HOME_ADSLIST_FAILURE],
-      endpoint: 'queryAdvertisements',
+      endpoint: 'queryAdvertisements.aspx',
       params: {
         type: 'HomePageTop',
         wxchannelCode: wxChannel,
@@ -21,7 +21,7 @@ export function loadHomeNewsList(page) {
     page,
     [types.CALL_API]: {
       types: [types.LOAD_HOME_NEWSLIST_REQUEST, types.LOAD_HOME_NEWSLIST_SUCCESS, types.LOAD_HOME_NEWSLIST_FAILURE],
-      endpoint: 'queryTopLineMovieNews',
+      endpoint: 'queryTopLineMovieNews.aspx',
       params: {
         type: -1,
         pageIndex: page,
@@ -36,7 +36,7 @@ export function loadVideosAdsList(wxChannel) {
   return {
     [types.CALL_API]: {
       types: [types.LOAD_VIDEOS_ADSLIST_REQUEST, types.LOAD_VIDEOS_ADSLIST_SUCCESS, types.LOAD_VIDEOS_ADSLIST_FAILURE],
-      endpoint: 'queryAdvertisements',
+      endpoint: 'queryAdvertisements.aspx',
       params: {
         type: 'VideoTop',
         wxchannelCode: wxChannel,
@@ -51,7 +51,7 @@ export function loadVideosNewsList(page) {
     page,
     [types.CALL_API]: {
       types: [types.LOAD_VIDEOS_NEWSLIST_REQUEST, types.LOAD_VIDEOS_NEWSLIST_SUCCESS, types.LOAD_VIDEOS_NEWSLIST_FAILURE],
-      endpoint: 'queryVideos',
+      endpoint: 'queryVideos.aspx',
       params: {
         videoType: 0,
         pageIndex: page,
@@ -66,7 +66,7 @@ export function loadMoviesAdsList(wxChannel) {
   return {
     [types.CALL_API]: {
       types: [types.LOAD_MOVIES_ADSLIST_REQUEST, types.LOAD_MOVIES_ADSLIST_SUCCESS, types.LOAD_MOVIES_ADSLIST_FAILURE],
-      endpoint: 'queryAdvertisements',
+      endpoint: 'queryAdvertisements.aspx',
       params: {
         type: 'MovieTop',
         wxchannelCode: wxChannel,
@@ -82,7 +82,7 @@ export function loadMoviesNewsList(page, filters) {
     filters,
     [types.CALL_API]: {
       types: [types.LOAD_MOVIES_NEWSLIST_REQUEST, types.LOAD_MOVIES_NEWSLIST_SUCCESS, types.LOAD_MOVIES_NEWSLIST_FAILURE],
-      endpoint: 'queryVideos',
+      endpoint: 'queryVideos.aspx',
       params: {
         videoType: 1,
         pageIndex: page,
@@ -101,7 +101,7 @@ export function refreshMoviesNewsList(page, filters) {
     filters,
     [types.CALL_API]: {
       types: [types.REFRESH_MOVIES_NEWSLIST_REQUEST, types.REFRESH_MOVIES_NEWSLIST_SUCCESS, types.REFRESH_MOVIES_NEWSLIST_FAILURE],
-      endpoint: 'queryVideos',
+      endpoint: 'queryVideos.aspx',
       params: {
         videoType: 1,
         pageIndex: page,
@@ -119,7 +119,7 @@ export function loadPublisherNewsList(page, publisherId) {
     publisherId,
     [types.CALL_API]: {
       types: [types.LOAD_PUBLISHER_NEWSLIST_REQUEST, types.LOAD_PUBLISHER_NEWSLIST_SUCCESS, types.LOAD_PUBLISHER_NEWSLIST_FAILURE],
-      endpoint: 'queryTopLineMovieNews',
+      endpoint: 'queryTopLineMovieNews.aspx',
       params: {
         type: publisherId,
         pageIndex: page,
@@ -136,7 +136,7 @@ export function toggleSubscribePublisher(subscribe, publisherId) {
     subscribe,
     [types.CALL_API]: {
       types: [types.TOGGLE_SUBSCRIBE_PUBLISHER_REQUEST, types.TOGGLE_SUBSCRIBE_PUBLISHER_SUCCESS, types.TOGGLE_SUBSCRIBE_PUBLISHER_FAILURE],
-      endpoint: subscribe ? 'SubscriberWeMedia' : 'UnSubscriberWeMedia',
+      endpoint: subscribe ? 'SubscriberWeMedia.aspx' : 'UnSubscriberWeMedia.aspx',
       params: {
         sourceID: publisherId,
         openId: cookies.get('openids') || '',
@@ -150,7 +150,7 @@ export function loadNews(newsId) {
   return {
     [types.CALL_API]: {
       types: [types.LOAD_NEWS_REQUEST, types.LOAD_NEWS_SUCCESS, types.LOAD_NEWS_FAILURE],
-      endpoint: 'queryMovieNewsByID',
+      endpoint: 'queryMovieNewsByID.aspx',
       params: {
         newsID: newsId,
         openId: cookies.get('openids') || '',
@@ -160,12 +160,13 @@ export function loadNews(newsId) {
 }
 
 // 支付订单
-export function getPayParam(orderId, redPacketId, cardPacketId, wxChannel) {
+export function getPayParam(channel, orderId, redPacketId, cardPacketId, wxChannel) {
   return {
     orderId,
+    channel,
     [types.CALL_API]: {
       types: [types.GET_PAY_PARAM_REQUEST, types.GET_PAY_PARAM_SUCCESS, types.GET_PAY_PARAM_FAILURE],
-      endpoint: 'QueryWeixinPlayParam',
+      endpoint: channel === 'weixin' ? 'QueryWeixinPlayParam.aspx' : 'HuaFeiGou/HuaFeiGou',
       params: {
         orderID: orderId,
         openID: cookies.get('openids') || '',

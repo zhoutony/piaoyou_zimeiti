@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, {Component} from 'react';
 import moment from 'moment';
 import classNames from 'classnames';
@@ -58,9 +59,13 @@ class PaymentSubmit extends Component{
   }
 
   render() {
-    const { onSubmit, submitting } = this.props;
+    let { onSubmit, submitting } = this.props;
     const { endTime } = this.state;
     const remainTime = endTime - new Date().getTime();
+
+    if (submitting) {
+      onSubmit = _.noop;
+    }
 
     return (
       <div className={styles.paymentSubmit}>
@@ -68,9 +73,14 @@ class PaymentSubmit extends Component{
           <span className={[icons.icon, icons['icon-cancel-circled2']].join(' ')}>不支持退款</span>
           <span className={[icons.icon, icons['icon-cancel-circled2']].join(' ')}>不支持更换场次</span>
         </p>
-        <span
+        <p className={styles.buttonContainer}>
+          <span
           className={classNames({ [styles.submit]: true, [styles.submitting]: submitting })}
-          onClick={onSubmit}>{submitting ? '正在支付，请稍后...' : '立即支付'}</span>
+          onClick={() => onSubmit('weixin')}>{submitting ? '正在支付...' : '微信支付'}</span>
+          <span
+          className={classNames({ [styles.submit]: true, [styles.submitting]: submitting })}
+          onClick={() => onSubmit('huafei')}>{submitting ? '正在支付...' : '话费购支付'}</span>
+        </p>
         <p className={styles.remainTime}>
           支付剩余时间&nbsp;&nbsp;
           <span>{remainTime > 0 ? formatDuration(remainTime) : '支付时间已过期'}</span>

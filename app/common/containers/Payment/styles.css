@@ -137,16 +137,22 @@
   margin-right: 1.67rem;
 }
 
-.submit {
+.buttonContainer {
   font-weight: 700;
   color: #fff;
   text-align: center;
+  font-size: 1.17rem;
+  margin: 1.25rem 0 .25rem;
+  display: flex;
+}
+
+.submit {
   background: #00968d;
   height: 2.83rem;
   line-height: 2.83rem;
-  font-size: 1.17rem;
   display: block;
-  margin: 1.25rem 0 .25rem;
+  margin: 0 1rem;
+  flex: 1 0;
 }
 
 .submitting {
