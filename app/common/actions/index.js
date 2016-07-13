@@ -166,7 +166,7 @@ export function getPayParam(channel, orderId, redPacketId, cardPacketId, wxChann
     channel,
     [types.CALL_API]: {
       types: [types.GET_PAY_PARAM_REQUEST, types.GET_PAY_PARAM_SUCCESS, types.GET_PAY_PARAM_FAILURE],
-      endpoint: channel === 'weixin' ? 'QueryWeixinPlayParam.aspx' : 'HuaFeiGou/HuaFeiGou',
+      endpoint: channel === 'weixin' ? 'QueryWeixinPlayParam.aspx' : 'HuaFeiGou.aspx',
       params: {
         orderID: orderId,
         openID: cookies.get('openids') || '',
