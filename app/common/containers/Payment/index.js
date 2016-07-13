@@ -121,7 +121,7 @@ class Payment extends Component {
           }
         });
       } else if ( channel === 'huafei') {
-        $('body').append(data);
+        $('body').append(decodeURIComponent(data));
       }
     } else if (state === 0) {
       setTimeout(() => {
