@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { Dialog, Toast } from 'react-weui';
@@ -120,7 +121,7 @@ class Payment extends Component {
           }
         });
       } else if ( channel === 'huafei') {
-        location.href = `/${this.wxChannel}/pay/orderwait/${orderId}`;
+        $('body').append(data);
       }
     } else if (state === 0) {
       setTimeout(() => {
