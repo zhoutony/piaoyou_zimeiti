@@ -76,7 +76,7 @@ app.get(['/get/queryadvertisements', '/:publicsignal/get/queryadvertisements'], 
   };
   renderData.data = {};
   model.fetchDataFromBack(options, function(err, data) {
-    console.log(data);
+    // console.log(data);
     renderData.data.err = err;
     if (!err && data && data.advertisements) {
       renderData.data.fourthAds = data.advertisements;
