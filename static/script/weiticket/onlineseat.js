@@ -47,7 +47,7 @@ $(document).ready(function() {
             bottom: bottom + 'px'
         });
     }
-    
+
     function initSeatControl(){
         var $root = $('.wrap'),
             $room = $root.find('.room'),
@@ -103,7 +103,7 @@ $(document).ready(function() {
         var oldDate = new Date(), newDate;
         $table.on('tap', 'span', function (evt) {
             if ($(evt.currentTarget).hasClass('seat_selected') || $(evt.currentTarget).hasClass('seat_ture')) {
-                
+
                 newDate = new Date();
                 if((newDate.getTime() - oldDate.getTime()) > 100){
                     oldDate = newDate;
@@ -132,8 +132,8 @@ $(document).ready(function() {
                     }
                 }
             )
-            
-            
+
+
         })
 
         //锁座
@@ -142,13 +142,13 @@ $(document).ready(function() {
                 seatIDs   = [],
                 seatNames = [],
                 showtimeId = showtime.showtimeID || '';
-            
+
             for(var i = 0; i < _len; i++){
                 var _item = selected_seats[i].split('#');
                 seatIDs.push(_item[0]);
                 seatNames.push(_item[1]);
-            }; 
-            
+            };
+
             option.seatIDs    = seatIDs.join(',');
             option.seatNames  = seatNames.join(',');
             option.showtimeID = showtimeId;
@@ -159,7 +159,8 @@ $(document).ready(function() {
                     localStorage.setItem('seats_' + showtimeId, JSON.stringify( selected_seats ));
                     localStorage.setItem('lockseats_' + showtimeId, JSON.stringify( reture_data.data ));
                     var orderId = reture_data.data.orderID || '0';
-                    location.href = '/payment/order/';
+                    var prefix = publicsignal ? ('/' + publicsignal) : '';
+                    location.href = prefix + '/payment/order/';
                 }else{
                     dialogs.tip('服务器繁忙，请稍候再试');
                 }
@@ -187,4 +188,4 @@ $(document).ready(function() {
             // location.href = 'http://weixin.qq.com/r/fEPm40XEi433KAGAbxb4';
         }
     })
-}); //END of jquery documet.ready 
+}); //END of jquery documet.ready

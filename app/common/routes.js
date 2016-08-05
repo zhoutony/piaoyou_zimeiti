@@ -22,6 +22,7 @@ export default (
     <Route path='payment/:showtimeId/:orderId/index' component={Payment} />
     <Route path=':wxChannel/payment/:showTimeId/:orderId/index' component={Payment} />
     <Route path='payment/:showTimeId/:orderId/index' component={Payment} />
+    <Route path=':wxChannel/payment/order' component={Payment} />
     <Route path='payment/order' component={Payment} />
     <Route path=':wxChannel' component={Home} />
   </Route>
