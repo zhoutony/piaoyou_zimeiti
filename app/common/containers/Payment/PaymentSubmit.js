@@ -59,7 +59,7 @@ class PaymentSubmit extends Component{
   }
 
   render() {
-    let { onSubmit, submitting } = this.props;
+    let { onSubmit, submitting, channel } = this.props;
     const { endTime } = this.state;
     const remainTime = endTime - new Date().getTime();
 
@@ -74,9 +74,12 @@ class PaymentSubmit extends Component{
           <span className={[icons.icon, icons['icon-cancel-circled2']].join(' ')}>不支持更换场次</span>
         </p>
         <p className={styles.buttonContainer}>
-          <span
-          className={classNames({ [styles.submit]: true, [styles.submitting]: submitting })}
-          onClick={() => onSubmit('weixin')}>{submitting ? '正在支付...' : '微信支付'}</span>
+          {channel === 'huafeigouApp' ?
+            null :
+            <span
+            className={classNames({ [styles.submit]: true, [styles.submitting]: submitting })}
+            onClick={() => onSubmit('weixin')}>{submitting ? '正在支付...' : '微信支付'}</span>
+          }
           <span
           className={classNames({ [styles.submit]: true, [styles.submitting]: submitting })}
           onClick={() => onSubmit('huafei')}>{submitting ? '正在支付...' : '话费购支付'}</span>

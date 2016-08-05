@@ -60,6 +60,7 @@ class Payment extends Component {
           selectedCardPacket={selectedCardPacket}
           selectedRedPacket={selectedRedPacket} />
         <PaymentSubmit
+          channel={this.wxChannel}
           endTime={new Date(lockInfo.playEndTime).getTime()}
           onSubmit={channel => this.handleSubmit(channel)}
           onExpire={() => this.handleExpire()}
