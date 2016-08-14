@@ -46,7 +46,7 @@ block prepend body
                 ul
                   each one_schedule in schedule1.shows
                     li
-                      a.flexbox_v_c(href= one_schedule.stopSellTime ? "/#{data.publicsignal}/room/#{one_schedule.showtimeID}" : "")
+                      a.flexbox_v_c(href= one_schedule.stopSellTime ? (one_schedule.ticketUrl || "/#{data.publicsignal}/room/#{one_schedule.showtimeID}") : "")
                         div.toolmid
                           - var dateIcon = one_schedule.isSun ? "icon-sun" : "icon-moon";
                           i.demo-icon(class="#{dateIcon}")
