@@ -26,6 +26,6 @@ block prepend footer
 block prepend script
   script
     | window.publicsignal = "#{data.publicsignal}";
-    | var orderId = "#{data.orderId}";
+    | var orderId = "#{data.orderId}" || localStorage.getItem('orderId');
   script(src="#{assets.common.js}")
   script(src="#{assets.orderwait.js}")

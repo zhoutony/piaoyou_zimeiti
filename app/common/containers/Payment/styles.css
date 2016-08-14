@@ -143,7 +143,6 @@
   text-align: center;
   font-size: 1.17rem;
   margin: 1.25rem 0 .25rem;
-  display: flex;
 }
 
 .submit {
@@ -151,8 +150,7 @@
   height: 2.83rem;
   line-height: 2.83rem;
   display: block;
-  margin: 0 1rem;
-  flex: 1 0;
+  margin: .5rem 1rem;
 }
 
 .submitting {

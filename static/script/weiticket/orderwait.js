@@ -27,10 +27,11 @@ $(document).ready(function() {
 				var _data = JSON.parse(result.data);
 
 				if(_data.success && _data.data){
+					var payState = _data.data.payState;
 					//出票成功 30   出票失败  40
-					if(_data.data.externalOrderStatus == 30){
+					if(_data.data.externalOrderStatus == 30 || payState === 1){
 						location.href = '/'+ publicsignal +'/order/succeed';
-					}else if(_data.data.externalOrderStatus == 40){
+					}else if(_data.data.externalOrderStatus == 40 || payState === 0){
 						location.href = '/'+ publicsignal +'/order/eorr';
 					}else{
 						//轮循出票接口
@@ -51,7 +52,7 @@ $(document).ready(function() {
         var _cinema = localStorage.getItem('cinema');
         var _showtime = localStorage.getItem('showtime');
         var _movie = localStorage.getItem('movie');
-        
+
         cinema =  _cinema ? JSON.parse( _cinema ) : '';
         showtime =  _showtime ? JSON.parse( _showtime ) : '';
         movie =  _movie ? JSON.parse( _movie ) : '';

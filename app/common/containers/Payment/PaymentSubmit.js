@@ -82,7 +82,7 @@ class PaymentSubmit extends Component{
           }
           <span
           className={classNames({ [styles.submit]: true, [styles.submitting]: submitting })}
-          onClick={() => onSubmit('huafei')}>{submitting ? '正在支付...' : '话费购支付'}</span>
+          onClick={() => onSubmit('huafei')}>{submitting ? '正在支付...' : '联通话费购支付'}</span>
         </p>
         <p className={styles.remainTime}>
           支付剩余时间&nbsp;&nbsp;

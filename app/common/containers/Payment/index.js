@@ -30,7 +30,7 @@ class Payment extends Component {
   };
 
   get wxChannel() {
-    return this.props.params.wxChannel || 'dypy';
+    return this.props.params.wxChannel || localStorage.getItem('wxChannel') || 'dypy';
   }
 
   render() {

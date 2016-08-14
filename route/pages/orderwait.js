@@ -2,7 +2,7 @@ var util = require('util');
 var model = require('../util/model');
 var constant = require('../util/constant');
 
-app.get(['/pay/orderwait/:orderId', '/:publicsignal/pay/orderwait/:orderId'], function(req, res) {
+app.get(['/pay/orderwait', '/pay/orderwait/:orderId', '/:publicsignal/pay/orderwait/:orderId'], function(req, res) {
   var renderData = {};
   var publicsignal = req.params['publicsignal'];
   var orderId = req.params['orderId'];

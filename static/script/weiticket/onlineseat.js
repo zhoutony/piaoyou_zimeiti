@@ -158,9 +158,9 @@ $(document).ready(function() {
                 if(reture_data && reture_data.data && reture_data.success){
                     localStorage.setItem('seats_' + showtimeId, JSON.stringify( selected_seats ));
                     localStorage.setItem('lockseats_' + showtimeId, JSON.stringify( reture_data.data ));
-                    var orderId = reture_data.data.orderID || '0';
-                    var prefix = publicsignal ? ('/' + publicsignal) : '';
-                    location.href = prefix + '/payment/order/';
+                    localStorage.setItem('wxChannel', publicsignal || '');
+                    localStorage.setItem('orderId', reture_data.data.orderID || '0');
+                    location.href = '/payment/order/';
                 }else{
                     dialogs.tip('服务器繁忙，请稍候再试');
                 }
