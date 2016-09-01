@@ -74,7 +74,7 @@ class PaymentSubmit extends Component{
           <span className={[icons.icon, icons['icon-cancel-circled2']].join(' ')}>不支持更换场次</span>
         </p>
         <p className={styles.buttonContainer}>
-          {channel === 'huafeigouApp' ?
+          {channel === 'huafeigouApp' || channel === 'huafeigouWeixin'?
             null :
             <span
             className={classNames({ [styles.submit]: true, [styles.submitting]: submitting })}
