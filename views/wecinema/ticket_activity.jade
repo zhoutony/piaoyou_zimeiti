@@ -20,12 +20,26 @@ block prepend body
                 li.eis2 演员：#{data.movie.actors}
                 li 类型：#{data.movie.MovieTypes}
                 li 日期：#{data.movie.releaseTime}上映
-                li 时长：#{data.movie.filmLength}分钟
+                li 时长：#{data.movie.filmLength}分钟 
+      div.tabs.serachmid
+        div.flexbox
+          div.sparpreis_title
+            span 《#{data.movie.movieNameCN}》特价票
+          div.flex.searchbox.flexbox
+            div.flex.searchtxt
+              span#sparpreis_button 活动规则  
+            a(herf="").btn_search
+      div.sparpreis
+        ul
+          li 1、活动时间：10月1日至10月8日
+          li 2、特价票每人限购2张，数量有限，抢完即止，同一账号、设备号、手机号、将视为同一用户；
+          li 3、在参加活动过程中、如果出现作弊行为（如批量注册、恶意购买、虚假分享、虚假交易等），电影票友将取消您本次活动的机会，并有权取消您后续参与电影票友任意活动的权利，必要时追究法律责任；
+          li 4、如有其它问题，请拨打4008-123-867，或关注微信电影票友公众号，票友君会为您解答     
       div.tabs.serachmid
         div.flexbox
           div.city
-            span #{data.cityName}
             i.demo-icon.icon-down-open-mini
+            span #{data.cityName}
           div.flex.searchbox.flexbox
             div.flex.searchtxt
             a(herf="").btn_search
@@ -45,14 +59,10 @@ block prepend body
                         p #{_cinemas.cinemaAddress}
                         p 最近场次：
                           | #{_cinemas.RecentShowtime}
-                        p.cinemasvouch
-                          if _cinemas.voucherNote != ''
-                            b #{_cinemas.voucherNote}
                       div.pricebox
                         p
                           if _cinemas.isTicket
                             span 座
-                        p.del ￥#{_cinemas.retailPrice}
                         p.newprice
                           | ￥#{_cinemas.limitPrice}
                           b 起

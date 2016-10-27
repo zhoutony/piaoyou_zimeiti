@@ -10,6 +10,7 @@ app.get(['/:locationID/filmlist/:showtype',
   var renderData = {};
   var apiURL = '/queryMovies.aspx';
   var _locationID = req.params['locationID'];
+  var cookieCity = req.cookies.city ? JSON.parse(req.cookies.city).locationId : _locationID;
   var showtype = req.params['showtype'];//coming
   var type = showtype == 'hot' ? 1 : 2;
   var sole = req.params['sole'];
@@ -31,7 +32,7 @@ app.get(['/:locationID/filmlist/:showtype',
   renderData.data = {};
   renderData.data = {
     showtype: showtype,
-    locationId: _locationID,
+    locationId: cookieCity,
     publicsignal: publicsignal,
   };
 

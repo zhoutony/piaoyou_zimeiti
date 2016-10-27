@@ -57,6 +57,14 @@ $(document).ready(function() {
         return;
     })
 
+    $('#sparpreis_button').on('click',function(){
+        if($('.sparpreis').hasClass('f-show')){
+            $('.sparpreis').removeClass('f-show');
+        }
+        else{
+            $('.sparpreis').addClass('f-show');
+        }
+    });
 
     _chooseCity.on('click', function(evt){
         ChooseCity.init(function(city){
@@ -105,6 +113,6 @@ $(document).ready(function() {
     //         // location.href = 'http://weixin.qq.com/r/fEPm40XEi433KAGAbxb4';
     //     }
     // })
-
+    
 
 }); //END of jquery documet.ready 

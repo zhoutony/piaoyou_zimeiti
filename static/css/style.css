@@ -374,7 +374,7 @@ html { font-size: 10px }
 .footer { text-align: center; padding: 1rem 0 }
 .footer h2, .footer h2 a { color: #00968d; font-size: 1.1rem; line-height: 2 }
 .footer p { font-size: 1rem }
-.serachmid { margin-top: 1rem; border: none; border-radius: 0; position: relative }
+.serachmid { border: none; border-radius: 0; position: relative }
 .serachmid:after { position: absolute; top: 0; left: -1rem; right: -1rem; content: ''; height: 1px; background: #068D86; -webkit-transform: scaleY(.5); overflow: hidden }
 .search { margin-top: 1rem }
 .search .searchtxt { font-size: 1.2rem; color: #00968d; text-align: center }
@@ -640,7 +640,7 @@ color:#fff
 .hottips .tipsbtn a:first-child:after { content: ''; display: block; width: 1px; overflow: hidden; background: #cecece; position: absolute; top: -1rem; bottom: -1rem; right: 0; -webkit-transform: scaleY(.5); transform: scaleY(.5) }
 .hot { text-align: center; line-height: 2rem; background: rgba(0,0,0,.8); position: fixed; top: 2rem; left: 0; right: 0; color: #fff; font-size: .8rem }
 .hot i { display: inline-block; vertical-align: middle; overflow: hidden; width: 1.1rem; height: 1.1rem; border-radius: 1.1rem; background: url(../images/hot.png) center center no-repeat; background-size: cover; margin: -.1rem .3rem 0 }
-.filmlistbox .imgbox { margin: 1rem 1rem 0; width: 9.8rem; height: 14.2rem }
+.filmlistbox .imgbox { margin: 1rem 1rem; width: 9.8rem; height: 14.2rem }
 .filmlistbox .boxtxt { padding: 1.5rem 0 }
 .filmlistbox .boxtxt h2 { font-size: 1.4rem; padding: 1.5rem 0 2rem; color: #595757; font-weight: 700 }
 .filmlistbox .boxtxt li { font-size: 1.1rem; color: #9E9E9F; line-height: 1.6 }
@@ -1643,3 +1643,26 @@ transform:scale(1)
   font-size: .5rem;
 }
 
+/*2016/10/20活动页优化*/
+#sparpreis_button{
+	float: right;
+	height: 3rem;
+	line-height: 3rem;
+}
+.sparpreis{
+	display: none;
+	background-color: #cacaca;
+	padding: 1rem 0 1rem 1rem;
+}
+.sparpreis li{
+	margin-bottom: 0.5rem;
+}
+.f-show{
+	display: block;
+	opacity: 1;
+}
+.sparpreis_title{
+	padding: 1rem 0 1rem 1rem;
+    font-size: 1.4rem;
+    color: #898989;
+}
