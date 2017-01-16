@@ -40,7 +40,7 @@ export default function publisher(state = initState, action) {
         publisherId,
       });
     case types.TOGGLE_SUBSCRIBE_PUBLISHER_SUCCESS:
-      const { publisherId, subscribe } = action;
+      const { subscribe } = action;
 
       if (parseInt(publisherId, 10) === parseInt(state.publisherId, 10)) {
         return merge({}, state, {
