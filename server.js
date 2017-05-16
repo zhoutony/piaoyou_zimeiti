@@ -1,4 +1,4 @@
-var fs = require('fs');
+﻿var fs = require('fs');
 var path = require('path');
 var express = require('express');
 var cookieParser = require('cookie-parser');
@@ -43,6 +43,6 @@ app.use(function(err, req, res, next) {
 require('./route');
 require('./app/server');
 
-var server = app.listen(3000, function() {
+var server = app.listen(80, function() {
   console.log('Listening on port %d', server.address().port);
 });
