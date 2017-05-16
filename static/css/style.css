@@ -259,7 +259,7 @@ html { font-size: 10px }
 .movielist .txtmid .curr { background: #fff; border: 1px solid #c6dfdd; color: #c6dfdd }
 .arrow { font-size: 2rem; margin-top: -3rem }
 .movielist .toolmid { width: auto }
-.fmaddimg, .fmaddimg .scrollpic, .fmaddimg .scrollpic img, .fmaddimg img { height: 7.9rem!important }
+.fmaddimg, .fmaddimg .scrollpic, .fmaddimg .scrollpic img, .fmaddimg img { height: 9.5rem!important }
 .closetit { display: none; background: #00968e; color: #fff }
 .closetit h2 { text-align: center; height: 2rem; font-size: 1.4rem; line-height: 2rem }
 .closetit .close { position: absolute; left: 0; top: 0; width: 4rem; height: 2rem; text-align: center; color: #fff; line-height: 2rem; font-size: 1.3rem }
@@ -303,8 +303,10 @@ html { font-size: 10px }
 .pricemid p.pricetxt { color: #00968d; font-size: 1.6rem }
 .orderbox { padding: 1.8rem 1.5rem 0 }
 .ruleline { height: .5rem; overflow: hidden; background: #00968d }
-.orderbox dt a { position: relative; display: block; border: 1px solid #ccc; text-align: center; font-size: 1.4rem; line-height: 2rem; height: 2rem; color: #00978a; border-radius: 4rem }
-.orderbox dt a:before { content: ''; display: block; background: url(../images/ruletips.png) center center no-repeat; background-size: auto 80%; width: 2rem; height: 2rem; position: absolute; top: 50%; margin-top: -1rem; right: .5rem }
+.orderbox dt a { position: relative; display: block; border: 1px solid #ccc; text-align: center; font-size: 1.4rem; line-height: 3rem; height: 3rem; color: #00978a; border-radius: 4rem }
+.orderbox dt a:before { content: ''; display: block; /*background: url(../images/ruletips.png) center center no-repeat;*/ background-size: auto 80%; width: 7rem; height: 2rem; position: absolute; top: 37%; margin-top: -1rem; right: .5rem }
+#piaoModal dt a:before { content: '+ 添加新卡' ; }
+#codeBag dt a:before { content: '+ 添加新码' ; }
 .orderbox .orderlist li { background: url(../images/orderbox02.png) bottom left repeat-x #B7B7B7; background-size: auto .75rem; padding: 0 1rem 1rem; margin: 1rem 0 0; position: relative; overflow: hidden; color: #fff }
 .orderbox .orderlist .showcode { padding: .5rem 0; width: 22rem; margin-right: .5rem; margin-bottom: .5rem }
 .orderbox .orderlist .showcode p { font-size: 1.2rem }
@@ -450,7 +452,7 @@ html { font-size: 10px }
 .registbox li .btn_code { border-left: .4rem solid #efefef; background: #fff; font-size: 1.2rem; padding: 0 .5rem; margin: -2px 0; position: relative; height: 2.9rem; display: block }
 .regist .btn_regist { display: block; margin: 1rem 5rem; background: #c9c9cb; height: 3rem; color: #fff; font-size: 1.2rem; border: none }
 .regist .btn_determine { background: #00958E }
-.regist .determine input { padding-left: .5rem }
+.regist .determine input { padding-left: .5rem ; font-family: Times New Roman;}
 .regist .regtxt { font-size: 1.2rem; line-height: 2.8rem }
 .regist .regtxt span { color: #00968d }
 .regist .registinfo { font-size: 1rem; line-height: 1.4; text-align: center; color: #b5b5b5; padding: 1rem 0 0 }
@@ -496,12 +498,12 @@ color:#fff
 .cardpop .cardlist li p { color: #898989; font-size: 1rem; line-height: 1.4; margin: .3rem 1.75rem 0 }
 .cardpop .cardmid li { margin: 1rem 2rem 0; padding: 1rem 0 .5rem 1.2rem; background: url(../images/cardinfo.png) center top no-repeat #fff; background-size: auto 1.5rem }
 .cardpop .cardmid .cardinfo { padding: 0 .5rem }
-.cardpop .cardmid .cardinfo .main p { padding-top: 1rem; color: #B4B4B5; font-size: .9rem }
+.cardpop .cardmid .cardinfo .main p { padding-top: 1rem; color: #B4B4B5; font-size: 1rem }
 .cardpop .cardmid .cardinfo .main b { font-size: 2rem; line-height: 2; color: #b5b5b5 }
 .cardmid .cardlay:after { content: ''; display: block; width: 8rem; height: 8rem; position: absolute; right: 1rem; top: 0; background: url(../images/quan.png) center center no-repeat; background-size: cover; z-index: 0 }
 .cardmid .cardlay { margin-right: .5rem; background: url(../images/card_arro.png) right center no-repeat; background-size: auto 2.3rem; position: relative; z-index: 1 }
 .cardpop .cardmid .cardinfo .aside { padding-top: 2rem; padding-bottom: .5rem }
-.cardpop .cardmid .cardinfo .aside p { padding-right: 1rem; color: #717171; font-size: .1rem; line-height: 2; text-align: right }
+.cardpop .cardmid .cardinfo .aside p { padding-right: 1rem; color: #717171; font-size: 1rem; line-height: 2; text-align: right }
 .cardpop .cardmid .cardend { border-top: 1px dotted #707070; margin: .5rem 0 0; padding: .5rem .5rem 0 }
 .cardpop .cardmid .cardend .main { color: #707070; font-size: 1rem }
 .cardpop .cardmid .cardend .aside { font-size: .8rem; color: #b6b6b6 }
@@ -1647,12 +1649,14 @@ transform:scale(1)
 #sparpreis_button{
 	float: right;
 	height: 3rem;
-	line-height: 3rem;
+	font-size: 1.4rem;
+	color: #333;
 }
 .sparpreis{
 	display: none;
+	font-size: 1.4rem;
 	background-color: #cacaca;
-	padding: 1rem 0 1rem 1rem;
+	padding: 1rem 0.5rem 1rem 1rem;
 }
 .sparpreis li{
 	margin-bottom: 0.5rem;
@@ -1662,7 +1666,233 @@ transform:scale(1)
 	opacity: 1;
 }
 .sparpreis_title{
-	padding: 1rem 0 1rem 1rem;
     font-size: 1.4rem;
-    color: #898989;
+    color: #333;
+}
+.moreMovie{
+	width: 100%;
+	height: 3.5rem;
+	background-color: #00958e;
+	line-height: 3.5rem;
+	text-align: center;
+	font-size: 1.5rem;
+	color: #fff;
+}
+.img_box{
+	width: auto !important;
+	height: auto !important;
+	margin: 0 !important;
+}
+.tabTitle{
+	height: 4.8rem;
+	line-height: 4.8rem;
+}
+.tabTitle:after{
+	background: none;
+}
+/*卡包绑定页*/
+.cardbind li{
+	border: 2px solid #cacaca;
+}
+.cardbind li.cardused{
+	border: none;
+	margin-top: 5rem;
+}
+.cardbind li.cardused span{
+	color: red;
+}
+.cardbind li.testcode{
+	border: none;
+	position: relative;
+	height: 3rem;
+}
+.cardbind li.testcode input{
+	border: 2px solid #cacaca;
+	height: 2.8rem;
+	display: inline;
+	width: 45%;
+	float: left;
+	position: absolute;
+	top: 0;
+	border-radius: 0;
+}
+.cardbind li.testcode img{
+	height: 2.8rem;
+	position: absolute;
+	left: 48%;
+
+}
+.cardbind li.testcode span.codechange{
+	position: absolute;
+	left: 82%;
+	line-height: 2.9rem;
+	color: #00958E;
+}
+.cardbind li.bindcheck{
+	display: block !important;
+	text-align: center;
+	border: none;
+	color: red;
+	opacity: 0;
+}
+/*添加票友卡*/
+.addPiaoCard{
+	position: relative;
+    top: 1rem;
+    display: block;
+    border: 1px solid #ccc;
+    text-align: center;
+    font-size: 1.6rem;
+    line-height: 3rem;
+    height: 3rem;
+    color: #fff;
+    border-radius: 0.5rem;
+    background-color: #00978a;
+}
+/*检查输出颜色*/
+.checkCards_add{
+	background: url(../images/n03_curr.png) center center no-repeat !important;
+	background-size: auto 7rem !important;
+}
+.checkOrders_add{
+	background: url(../images/n01_curr.png) center center no-repeat !important;
+	background-size: auto 7rem !important;
+}
+.checkCodes_add{
+	background: url(../images/n02_curr.png) center center no-repeat !important;
+	background-size: auto 7rem !important;
+}
+.checkReds_add{
+	background: url(../images/n04_curr.png) center center no-repeat !important;
+	background-size: auto 7rem !important;
+}
+
+/*绑定手机号，红包*/
+.checkState{
+	text-align: center;
+	margin-top: 1rem;
+}
+.regist_bind{
+	margin: 1rem 0 0;
+}
+
+@font-face {font-family: "iconfont";
+  src: url('../font/iconfont.eot?t=1481856996929'); /* IE9*/
+  src: url('../font/iconfont.eot?t=1481856996929#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('../font/iconfont.woff?t=1481856996929') format('woff'), /* chrome, firefox */
+  url('../font/iconfont.ttf?t=1481856996929') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('../font/iconfont.svg?t=1481856996929#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:18px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  vertical-align: text-top;
+  color: #ccc;
+  cursor: pointer;
+  padding-right: 1rem;
+}
+
+.ficon-cuowu:before { content: "\e600"; }
+
+.ficon-yanjing:before { content: "\e63a"; font-size: 20px; }
+
+.tel_name:before,
+.code_name:before,
+.pwd_name:before {
+    content: '手机号';
+    line-height: 1.7rem;
+    display: inline-block;
+    margin-left: 1rem;
+}
+
+.pwd_name:before {
+    content: '密码';
+}
+
+.pwd_name input{
+	padding-left: 1.5rem !important;
+}
+
+.code_name:before{
+	content: '验证码';
+}
+
+.code_left{
+	width: 65%;
+    float: left;
+    margin-right: 2%;
+}
+
+.code_right{
+	width: 32%;
+    float: right;
+    border: 2px solid #00958E !important;
+    background: #00958E;
+    color: #fff;
+}
+
+.code_right input{
+	text-align: center;
+	padding-left: 0 !important;
+}
+
+.f-hide{
+	display: none !important;
+}
+
+.img_logo{
+	text-align: center;
+    font-size: 1.1rem;
+    color: #00968d;
+    background: url(../images/login.png) center top no-repeat;
+    background-size: 5rem auto;
+    padding: 5.5rem 0 .5rem;
+    margin-bottom: 2rem;
+    width: 45%;
+    float: left;
+    margin-top: 1.5rem;
+}
+
+.img_tel{
+	text-align: center;
+    font-size: 1.1rem;
+    color: #00968d;
+    background: url(../images/img_tel.png) center top no-repeat;
+    background-size: 5rem auto;
+    padding: 5.5rem 0 .5rem;
+    margin-bottom: 2rem;
+    width: 45%;
+    float: right;
+    margin-top: 1.5rem;
+}
+
+.syncing{
+	position: absolute;
+    left: 50%;
+    width: 100px;
+    text-align: center;
+    margin-left: -50px;
+    margin-top: 3rem;
+}
+
+.redBagPrice{
+	font-size: 2rem !important;
+}
+
+._hoting{
+	/*text-align: right !important;*/
+	/*margin-right: 2rem;*/
+	right: 20%;
+}
+
+._locking{
+	color: #fff;
+	font-size: 1.5rem;
+}
+.hottips p.confirmPhone{
+	padding: 1rem 0;
 }

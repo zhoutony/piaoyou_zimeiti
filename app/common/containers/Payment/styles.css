@@ -82,10 +82,15 @@
 }
 
 .cardPacket::before {
-  content: '票友包';
+  content: '票友卡';
+}
+
+.codePacket::before {
+  content: '兑换码';
 }
 
 .redPacket,
+.codePacket,
 .cardPacket {
   font-size: .92rem;
   color: #c8c8c8;
@@ -188,4 +193,8 @@
   color: #00968d;
   font-size: .9rem;
   line-height: 1.83;
+}
+
+.cardPacketLocks{
+  color: #ccc;
 }

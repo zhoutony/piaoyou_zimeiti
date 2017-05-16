@@ -7,6 +7,9 @@ app.get(['/:cityId/ticket/:movieId', '/:publicsignal/:cityId/ticket/:movieId'], 
   var renderData = {};
   var apiURL = '/queryCinemas.aspx';
   var cityId = req.params['cityId'];
+      cityId = cityId != "undefined" ? cityId : '110100';
+  var cookieCity = req.cookies.city && req.cookies.city.hasOwnProperty('locationId')? JSON.parse(req.cookies.city).locationId : cityId;
+  // console.log(cookieCity)
   var movieId = req.params['movieId'];
   var publicsignal = req.params['publicsignal'];
   if (!publicsignal) {
@@ -15,7 +18,7 @@ app.get(['/:cityId/ticket/:movieId', '/:publicsignal/:cityId/ticket/:movieId'], 
   var options = {
     url: apiURL,
     args: {
-      locationID: cityId,
+      locationID: cookieCity,
       movieID: movieId,
       pageIndex: 1,
       pageSize: 100,

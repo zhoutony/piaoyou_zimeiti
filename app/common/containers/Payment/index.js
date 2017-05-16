@@ -12,6 +12,7 @@ import PaymentTool from './PaymentTool';
 import PaymentSubmit from './PaymentSubmit';
 import CardPacketListModal from '../../components/CardPacketListModal';
 import RedPacketListModal from '../../components/RedPacketListModal';
+import CodePacketListModal from '../../components/CodePacketListModal';
 import Helper from '../../components/Helper';
 
 import styles from './styles.css';
@@ -22,6 +23,8 @@ class Payment extends Component {
   state = {
     selectedRedPacketId: null,
     selectedRedPacket: 0,
+    selectedCodePacketId: null,
+    selectedCodePacket: 0,
     selectedCardPacketId: null,
     selectedCardPacket: 0,
     openCardPacketModal: false,
@@ -38,13 +41,35 @@ class Payment extends Component {
     const {
       selectedRedPacketId,
       selectedRedPacket,
+      selectedCodePacketId,
+      selectedCodePacket,
       selectedCardPacketId,
       selectedCardPacket,
       isOpenCardPacketModal,
       isOpenRedPacketModal,
+      isOpenCodePacketModal,
       message,
       messageCallback,
     } = this.state;
+
+  const total = seats.length * parseInt(showtime.price, 10) / 100;
+  const selectCardPacket = selectedCardPacket <= total ? selectedCardPacket : total;
+  // const checkedCode = selectedCodePacket != 0? parseInt(showtime.price, 10) / 100 : 0 ;
+  var checkedCode = '';
+  var selectedRedNum = '';
+  var selectedCardNum = '';
+  if( window.redarray != null){
+  const arrayLength = window.redarray.length || 0;
+  checkedCode = arrayLength == 0 ? 0 : ((arrayLength < seats.length) ? arrayLength*parseInt(showtime.price, 10) / 100 : total) ;
+  selectedRedNum = window.redarray.length != 0 ? null : selectedRedPacket;
+  selectedCardNum = window.redarray.length != 0 ? null : selectCardPacket;
+  }
+  else{
+  selectedRedNum = selectedRedPacket;
+  selectedCardNum = selectCardPacket;
+  }
+  
+  const remain = parseFloat(total - selectedRedNum - selectedCardNum - checkedCode, 10);
 
     return (
       <div className={styles.container}>
@@ -53,13 +78,22 @@ class Payment extends Component {
           seats={seats}
           showtime={showtime}
           mobile={mobile}
-          onOpenCardPacketModal={() => this.handleOpenCardPacketModal()}
-          onOpenRedPacketModal={() => this.handleOpenRedPacketModal()}
+          onOpenCardPacketModal={() => payParam.cardPacketLock ? '' : this.handleOpenCardPacketModal()}
+          onOpenCodePacketModal={() => payParam.cardPacketLock ? '' : this.handleOpenCodePacketModal()}
+          onOpenRedPacketModal={() => payParam.cardPacketLock ? '' : this.handleOpenRedPacketModal()}
+          // onOpenRedPacketModal={() => this.handleOpenRedPacketModal()}
           redPackets={lockInfo.redEnvelopes}
           cardPackets={lockInfo.piaoyouCards}
+          codePackets={lockInfo.redeemCode}
           selectedCardPacket={selectedCardPacket}
-          selectedRedPacket={selectedRedPacket} />
+          selectedRedPacket={selectedRedPacket}
+          selectedCodePacket={selectedCodePacket}
+          cardPacketLock={payParam.cardPacketLock} />
         <PaymentSubmit
+          remain={remain}
+          selectedCardPacket={selectedCardPacket}
+          selectedRedPacket={selectedRedPacket}
+          selectedCodePacket={selectedCodePacket}
           channel={this.wxChannel}
           endTime={new Date(lockInfo.playEndTime).getTime()}
           onSubmit={channel => this.handleSubmit(channel)}
@@ -80,6 +114,12 @@ class Payment extends Component {
           onSelect={(redPacketId, amount) => this.handleSelectRedPacket(redPacketId, amount)}
           onClose={() => this.handleCloseRedPacketModal()}
           />}
+        {isOpenCodePacketModal && <CodePacketListModal
+          codePacketList={lockInfo.redeemCode}
+          onSelect={(codePacketId, amount) => this.handleSelectCodePacket(codePacketId, amount)}
+          onClose={() => this.handleCloseCodePacketModal()}
+          onCheck={(codeId) => this.checkSelectCode(codeId)}
+          />}  
         <Alert
           show={!!message}
           title="提示"
@@ -107,7 +147,7 @@ class Payment extends Component {
 
   pay(payParam) {
     const { orderId, data, success, state, error, channel } = payParam;
-
+    
     if (data && success) {
 
       if (channel === 'weixin') {
@@ -123,6 +163,12 @@ class Payment extends Component {
         });
       } else if ( channel === 'huafei') {
         $('body').append(decodeURIComponent(data));
+      } else if ( channel === 'aLipay') {
+        $('body').append(decodeURIComponent(data));
+      } 
+    } else if (success) {
+      if( channel === 'direct' ){
+        location.href = `/${this.wxChannel}/pay/orderwait/${orderId}`;
       }
     } else if (state === 0) {
       setTimeout(() => {
@@ -137,9 +183,18 @@ class Payment extends Component {
 
   handleSubmit(channel) {
     const { lockInfo, getPayParam } = this.props;
-    const { selectedRedPacketId, selectedCardPacketId } = this.state;
-
-    getPayParam(channel, lockInfo.orderID, selectedRedPacketId, selectedCardPacketId, this.wxChannel);
+    const { selectedRedPacketId, selectedCardPacketId, selectedCodePacketId } = this.state;
+    var selectedCodeId = '';
+    var selectedRedId = '';
+    var selectedCardId = '';
+    if(window.redarray!=null){
+      selectedCodeId = window.redarray.join('&');
+      selectedRedId = null;
+      selectedCardId = null;
+      getPayParam(channel, lockInfo.orderID, selectedRedId, selectedCardId, selectedCodeId, this.wxChannel);
+      return;
+    }
+    getPayParam(channel, lockInfo.orderID, selectedRedPacketId, selectedCardPacketId, selectedCodePacketId, this.wxChannel);
   }
 
   handleExpire() {
@@ -150,6 +205,48 @@ class Payment extends Component {
       }
     }));
   }
+
+
+  checkSelectCode(codeId) {
+    // $('strong:eq(0)').css('display',$('strong').css('display') == 'none' ? 'block' : 'none');
+    for (var x = 0; x < $('i').length; x++) {
+        if ($('i:eq(' + x + ')').text() == codeId) {
+            var iParent = $('i:eq(' + x + ')').parent().parent().parent().find('strong');
+
+            iParent.css('display', iParent.css('display') == 'none' ? 'block' : 'none');
+            if (iParent.css('display') == 'block') {
+                if (window.redarray == null) {
+                    window.redarray = new Array(iParent.parent().find('i').text());
+                    // console.log(window.redarray);
+                } else {
+                    var array = window.redarray;
+                    var id = iParent.parent().find('i').text();
+                    for (var i = 0; i < array.length; i++) {
+                        if (id == array[i]) {
+                            return;
+                        }
+                    }
+                    window.redarray.push(iParent.parent().find('i').text());
+                    // console.log(window.redarray);
+                }
+            } else {
+                if (window.redarray == null) {
+                    // window.redarray=new Array(iParent.parent().find('i').text());
+                    // console.log(window.redarray);
+                } else {
+                    for (var i = 0; i < window.redarray.length; i++) {
+                        if (iParent.parent().find('i').text() == window.redarray[i]) {
+                            window.redarray.splice(i, 1);
+                            // console.log(window.redarray);
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}
+
 
   // 关闭卡包
   handleCloseCardPacketModal() {
@@ -165,11 +262,19 @@ class Payment extends Component {
     }));
   }
 
+  // 关闭兑换码
+  handleCloseCodePacketModal() {
+    this.setState(merge({}, this.state, {
+      isOpenCodePacketModal: false,
+    }));
+  }
+
   // 打开卡包
   handleOpenCardPacketModal() {
     this.setState(merge({}, this.state, {
       isOpenCardPacketModal: true,
       isOpenRedPacketModal: false,
+      isOpenCodePacketModal: false,
     }));
   }
 
@@ -177,6 +282,16 @@ class Payment extends Component {
   handleOpenRedPacketModal() {
     this.setState(merge({}, this.state, {
       isOpenRedPacketModal: true,
+      isOpenCardPacketModal: false,
+      isOpenCodePacketModal: false,
+    }));
+  }
+
+  // 打开兑换码
+  handleOpenCodePacketModal() {
+    this.setState(merge({}, this.state, {
+      isOpenCodePacketModal: true,
+      isOpenRedPacketModal: false,
       isOpenCardPacketModal: false,
     }));
   }
@@ -188,6 +303,8 @@ class Payment extends Component {
       selectedCardPacket: amount,
       selectedRedPacketId: null,
       selectedRedPacket: 0,
+      selectedCodePacketId: null,
+      selectedCodePacket: 0,
       isOpenCardPacketModal: false,
     }));
   }
@@ -199,7 +316,22 @@ class Payment extends Component {
       selectedRedPacket: amount,
       selectedCardPacketId: null,
       selectedCardPacket: 0,
+      selectedCodePacketId: null,
+      selectedCodePacket: 0,
       isOpenRedPacketModal: false,
+    }));
+  }
+
+  // 选择兑换码
+  handleSelectCodePacket(codePacketId, amount) {
+    this.setState(merge({}, this.state, {
+      selectedCodePacketId: codePacketId,
+      selectedCodePacket: amount,
+      selectedCardPacketId: null,
+      selectedCardPacket: 0,
+      selectedRedPacketId: null,
+      selectedRedPacket: 0,
+      isOpenCodePacketModal: false,
     }));
   }
 }
@@ -213,7 +345,7 @@ function mapStateToProps(state, ownProps) {
 
   const showtime = JSON.parse(localStorage.getItem('showtime') || '{}');
   // const showtime = {'showtimeID':70454652,'movieID':292,'cinemaID':2750,'hallID':1147,'hallName':'4号厅','version':'3D','language':'英文版','ticketStartTime':'22:05','ticketEndTime':'23:35结束','price':'6000','retailPrice':'6800','voucherNote':'猴年特惠减8.00元','showTime':'2016-05-15 22:05','duration':90,'stopSellTime':true,'isSun':false};
-  const seats = JSON.parse(localStorage.getItem(`seats_${showtime.showtimeID}`) || '[]').map(seat => seat.split('#')[1]);
+  const seats = JSON.parse(localStorage.getItem(`seats_${showtime.showtimeID}`) || '[]').map(seat => seat.split('@')[1]);
   // const seats = ['3排02座','3排03座','3排05座','3排06座'];
 
   const mobile = localStorage.getItem('tel');
@@ -267,12 +399,15 @@ function mapStateToProps(state, ownProps) {
   //       endTime: '2016-05-25 10:00:00',
   //     },
   //   ],
-  //   "redEnvelopes":[
-  //     {"redEnvelopeID":"1","money":20,"lowest":50,"endTime":"2015-07-23 03:05:00","status":"1","remarks":"只能在本平台使用"},
-  //     {"redEnvelopeID":"1","money":20,"lowest":50,"endTime":"2015-07-23 03:05:00","status":"2","remarks":"只能在本平台使用"},
-  //     {"redEnvelopeID":"1","money":20,"lowest":50,"endTime":"2015-07-23 03:05:00","status":"3","remarks":"只能在本平台使用"},
-  //     {"redEnvelopeID":"1","money":20,"lowest":50,"endTime":"2015-07-23 03:05:00","status":"1","remarks":"只能在本平台使用"},
-  //   ]
+    // "redEnvelopes":[
+    //   {"redEnvelopeID":"1","money":20,"lowest":50,"endTime":"2015-07-23 03:05:00","status":"1","remarks":"只能在本平台使用"},
+    //   {"redEnvelopeID":"1","money":20,"lowest":50,"endTime":"2015-07-23 03:05:00","status":"2","remarks":"只能在本平台使用"},
+    //   {"redEnvelopeID":"1","money":20,"lowest":50,"endTime":"2015-07-23 03:05:00","status":"3","remarks":"只能在本平台使用"},
+    //   {"redEnvelopeID":"1","money":20,"lowest":50,"endTime":"2015-07-23 03:05:00","status":"1","remarks":"只能在本平台使用"},
+    // ],
+    // "redeemCode":[
+    //   {"id":"1","endTime":"2016/12/6 11:17:47","movieName":"《奇异博士》","type","普通兑换券","cinema","全国影院","state",1},
+    // ]
   // };
 
   let payParam = {};

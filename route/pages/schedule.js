@@ -14,6 +14,11 @@ app.get(['/schedule/:cinemaId/:movieId',
     dateTime = req.params['dateTime'],
     publicsignal = req.params['publicsignal'],
     isShowtime = req.params['isShowtime'];
+  if(req.cookies.activity){
+    var activityId = JSON.parse(req.cookies.activity).activityID;
+    var from = JSON.parse(req.cookies.activity).from;
+  }
+    
   if (isShowtime == '1') {
     isShowtime = 'true';
   } else {
@@ -30,10 +35,14 @@ app.get(['/schedule/:cinemaId/:movieId',
       movieID: movieId,
       dateTime: '',
       wxchannelCode: publicsignal,
-      isShowtime: isShowtime
+      isShowtime: isShowtime,
     }
   };
-  // console.log('isShowtime:', isShowtime);
+  if(req.cookies.activity){
+    options.args.activityID = activityId;
+    options.args.from = from;
+  }
+  
   renderData.data = {};
   renderData.data = {
     reversion: global.reversion,
@@ -44,7 +53,7 @@ app.get(['/schedule/:cinemaId/:movieId',
     movieId: movieId,
     publicsignal: publicsignal
   };
-
+  
   model.fetchDataFromBack(options, function(err, data) {
     renderData.data.err = err;
     if (!err && data) {

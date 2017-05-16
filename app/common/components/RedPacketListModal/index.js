@@ -9,24 +9,25 @@ const RedPacketListModal = ({ redPacketList, onSelect, onClose }) => {
     <Modal title='红包' onClose={onClose}>
       <ul className={styles.list}>
         {redPacketList.map((redPacket) => {
-          const { redEnvelopeID, status, money, lowest, remarks, endTime } = redPacket;
-
+          const { Id, price, cinema, endTime, movieName } = redPacket;
+          const finalPrice = price/100;
           return (
             <li
-              className={[styles.item, status === '1' ? styles.available : ''].join(' ')}
-              onClick={() => onSelect(redEnvelopeID, money)}>
+              className={[styles.item, styles.available ].join(' ')}
+              onClick={() => onSelect(Id, finalPrice)}>
               <div className={styles.info}>
                 <div className={styles.amount}>
                   <p>红包</p>
-                  <p>￥{money}</p>
+                  <p>￥{finalPrice}</p>
                 </div>
                 <div className={styles.condition}>
-                  <p>仅可购买电影票</p>
-                  <p>满{lowest}元可用</p>
+                  <p>{movieName}观影红包</p>
+                  <p>{cinema}、限3D</p>
+                  <p>限50元以内场次</p>
                 </div>
               </div>
               <div className={styles.limit}>
-                <p>{remarks}</p>
+                <p>只能在本平台使用</p>
                 <span>{endTime}到期</span>
               </div>
             </li>

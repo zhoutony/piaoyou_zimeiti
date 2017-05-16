@@ -10,6 +10,7 @@ export default function payParam(state = {}, action) {
         orderId,
         channel,
         submitting: true,
+        cardPacketLock: true,
       };
     case types.GET_PAY_PARAM_SUCCESS:
       const { data, success, orderState, errorInfo } = response;
@@ -20,6 +21,7 @@ export default function payParam(state = {}, action) {
         channel,
         state: parseInt(orderState, 10),
         submitting: false,
+        cardPacketLock: true,
         error: errorInfo,
       });
     case types.GET_PAY_PARAM_FAILURE:
@@ -27,6 +29,7 @@ export default function payParam(state = {}, action) {
         orderId,
         channel,
         submitting: false,
+        cardPacketLock: true,
         error,
       };
     default:

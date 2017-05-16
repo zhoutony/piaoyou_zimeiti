@@ -124,6 +124,10 @@ $(document).ready(function() {
                         tel = inputTel.val();
                     if(/^1[23456789]\d{9}$/.test(tel)){
                         localStorage.setItem('tel', tel);
+                        // 设置 Cookie
+                        var cookieExpired = 60 * 60 * 24 * 30; //30天
+                        var cookiePath = '/';
+                        cookie.setItem('tel', tel, cookieExpired, cookiePath);
                         if(_len){
                             lockSeats(selected_seats, _len, tel);
                         }
@@ -143,12 +147,13 @@ $(document).ready(function() {
                 seatNames = [],
                 showtimeId = showtime.showtimeID || '';
 
+            var cancle = dialogs.Loading2();
             for(var i = 0; i < _len; i++){
-                var _item = selected_seats[i].split('#');
+                var _item = selected_seats[i].split('@');
                 seatIDs.push(_item[0]);
                 seatNames.push(_item[1]);
             };
-
+            
             option.seatIDs    = seatIDs.join(',');
             option.seatNames  = seatNames.join(',');
             option.showtimeID = showtimeId;
@@ -162,6 +167,7 @@ $(document).ready(function() {
                     localStorage.setItem('orderId', reture_data.data.orderID || '0');
                     location.href = '/payment/order/';
                 }else{
+                    cancle(true);
                     dialogs.tip('服务器繁忙，请稍候再试');
                 }
             })

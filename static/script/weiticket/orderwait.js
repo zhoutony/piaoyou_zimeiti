@@ -29,7 +29,7 @@ $(document).ready(function() {
 				if(_data.success && _data.data){
 					var payState = _data.data.payState;
 					//出票成功 30   出票失败  40
-					if(_data.data.externalOrderStatus == 30 || payState === 1){
+					if(_data.data.externalOrderStatus == 30 && payState === 1){
 						location.href = '/'+ publicsignal +'/order/succeed';
 					}else if(_data.data.externalOrderStatus == 40 || payState === 0){
 						location.href = '/'+ publicsignal +'/order/eorr';
@@ -70,7 +70,7 @@ $(document).ready(function() {
             _seats = _seatsName = [];
         if(_len > 0){
             for (var i = 0; i < _len; i++) {
-                var seat = seats[i].split('#');
+                var seat = seats[i].split('@');
                 _seats.push(seat[0]);
                 _seatsName.push(seat[1]);
                 _html += '<i class="ico_tick">'+ seat[1] +'</i>'

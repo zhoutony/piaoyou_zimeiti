@@ -91,7 +91,7 @@ $(document).ready(function() {
     }
 
     // 获取当前位址
-    getCurrentPosition();
+    // getCurrentPosition();
 
     // 设置城市
     function setCity(city, dontRedirect) {
@@ -106,7 +106,8 @@ $(document).ready(function() {
 
         // 跳转页面
         var subPage = window.showtype === 'coming' ? '/ticket/' : '/filmlist/hot';
-        location.href = '/'+ window.publicsignal + '/' + city.locationId + subPage;
+        var activity_number = Math.random();
+        location.href = '/'+ window.publicsignal + '/' + city.locationId + subPage + '?' + activity_number;
     }
 
     $('#menutop').on('click', 'li', function(evt){
@@ -167,6 +168,7 @@ $(document).ready(function() {
         }
     })
 
+    wxbridge.getLocation();
     // var shareImgs = $('.infocon').find('img');
     // wxbridge.share({
     //     title: Util.strShort($('.infotit').html(), 25)  + ' -' + weMediaName,

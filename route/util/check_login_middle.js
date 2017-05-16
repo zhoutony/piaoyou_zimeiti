@@ -64,7 +64,7 @@ function isLoggedIn(req, res, next) {
       app_id +
       '&redirect_uri=' +
       encoded_callback_url +
-      '&response_type=code&scope=snsapi_base&state=1#wechat_redirect';
+      '&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect';
     return open_weixin_url;
   };
 
@@ -77,7 +77,6 @@ function isLoggedIn(req, res, next) {
         // console.error('非法页面调用');
         res.send('非法页面调用');
       }
-
       if (open_id) {
         return next();
       } else {

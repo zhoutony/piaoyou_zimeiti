@@ -1,7 +1,7 @@
 var request = require('request');
 
 //HTTP请
-var urlPrefix = 'http://weiticket.com:8088';
+var urlPrefix = 'http://weiticket.com:8086';
 
 // 将所有的请求都包装成起来，处理报错，日志，tracking，某些缓存等等事宜
 var fetchDataFromBack = function(options, callback) {

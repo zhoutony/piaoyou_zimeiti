@@ -1,3 +1,6 @@
+//ticket_activity
+require('./pages/ticket_activity');
+
 //selflist
 require('./pages/selflist');
 
@@ -75,3 +78,4 @@ require('./pages/skip');
 
 //video
 require('./pages/video');
+

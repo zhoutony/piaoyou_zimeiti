@@ -1,7 +1,7 @@
 extends ./layout
 
 block title
-  title 电影票友
+  title 
 
 
 
@@ -86,3 +86,4 @@ block prepend script
     | var shareInfo = !{JSON.stringify(data.shareInfo)};
   script(src="#{assets.common.js}")
   script(src="#{assets.schedule.js}")
+  script(src="#{assets.getTitle.js}")

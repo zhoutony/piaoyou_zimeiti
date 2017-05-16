@@ -15,31 +15,33 @@ block prepend body
           dl
             if data.uses
               dt.myphoto
-                img(src="#{data.uses.headImgurl}")
+                if data.wxUser
+                  img(src="#{data.wxUser.headimgurl}")
               dd
-                b #{data.uses.nick}
-                div.myadd
-                  a.flexbox_vh_c(href="/#{data.publicsignal}/selflist")
-
+                if data.wxUser
+                  b #{data.wxUser.nickname}
+                div.myadd.myBind
+                  a(data-item="bindNumber").flexbox_vh_c
                     em +
+                p.myprice.myBind 绑定手机号
                 p.myprice 余额：0.00元
-                p.mytxt 在电影的时光读懂自已！
+                //- p.mytxt.m-hide 在电影的时光读懂自已！
             else
               dt.myphoto
               dd
                 b
                 div.myadd.flexbox_vh_c
-                  a.flexbox_vh_c(href="/#{data.publicsignal}/selflist")
+                  a(data-item="bindNumber").flexbox_vh_c
 
                     em +
+                p.myprice 绑定手机号
                 p.myprice 余额：0.00元
-                p.mytxt 在电影的时光读懂自已！
+                //- p.mytxt 在电影的时光读懂自已！
 
       ul.navmy.flexbox
-        li.flex 我的足迹
         li.curr.flex 我的中心
-
-
+        li.flex 我的足迹
+        
       nav.mynav.m-hide
         ul.flexbox_v_c
           li.flex
@@ -48,34 +50,26 @@ block prepend body
             i.ico_io
           li.flex
             a(href="") 注册
-      div.subtablist.userNews(style="display:none;")
-        div.empty(style= data.userNews ? 'display:none' : '')
-
-        ul.mylistbox(style= data.userNews ? '' : 'display:none')
-          include ./pagelets/user-news
-        div.loading(style='display: none;')
-          div.mui-spinner
-          div 加载中.....
       div.subtablist
         div.mymenu
           ul.flexbox
-            li(data-item="myorders")
+            li(data-item="myorders")#checkOrders
               a
                 i.n01
                 p 订单
-            li(data-item="")
-              a
-                i.n02
-                p 衍生品
-            li(data-item="mypiao")
+            li(data-item="mypiao")#checkCards
               a
                 i.n03
                 p 卡包
-          ul.flexbox
-            li(data-item="myredbag")
+            li(data-item="myredbag")#checkReds
               a
                 i.n04
-                p 红包
+                p 红包      
+          ul.flexbox
+            li(data-item="mycode")#checkCodes
+              a
+                i.n02
+                p 兑换码
             li(data-item="")
               a
                 i.n05
@@ -84,6 +78,14 @@ block prepend body
               a
                 i.n06
                 p 设置
+      div.subtablist.userNews(style="display:none;")
+        div.empty(style= data.userNews ? 'display:none' : '')
+
+        ul.mylistbox(style= data.userNews ? '' : 'display:none')
+          include ./pagelets/user-news
+        div.loading(style='display: none;')
+          div.mui-spinner
+          div 加载中.....
 
       //- include ./pagelets/head/footer
       //- footer.footer.myfoot

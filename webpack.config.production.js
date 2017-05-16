@@ -27,6 +27,7 @@ module.exports = {
     medialist: './medialist.js',
     orderwait: './orderwait.js',
     orderResult: './orderResult.js',
+    getTitle: './getTitle.js'
   },
   output: {
     path: path.join(__dirname, './dist/script/'),

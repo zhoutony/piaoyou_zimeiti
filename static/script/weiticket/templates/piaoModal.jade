@@ -1,14 +1,19 @@
 mixin detail
-  dl.redinfo(v-if="piao")
-    dt 卡包规则
+  dl.redinfo(v-if="")
+    dt 票友卡使用规则
     dd
-      h2 金额：{{ piao.money }}元
-    ul
-      li 使用范围
+      h2 票友卡
+    ul(style="border-bottom:0")
+      li 卡号：SDH3720322432
+      li 卡余额：{{ piao.money }}元
+    h2 使用范围
+    ul(style="border-bottom:0")
       li 影片：{{ piao.movieName }}
       li 有效期：{{ piao.endTime }}
       li 版本：{{ piao.Versions }}
+      li 兑换限价：不限
       li 影院：{{ piao.cinemaName }}
+      li 使用城市：全国
       li 说明：{{ piao.remarks }}
     h2 使用规则
     ol
@@ -19,10 +24,10 @@ div#piaoModal
   +detail
   div.orderbox(v-else)
     dt
-      a
-        | 票友卡
+      a(v-on:click="showCard()")
+        | 电影卡
     dd
-      div.cardpop
+      div.cardpop(style="margin-top:2rem")
         ul.cardlist
           li(
             v-for="piao in piaoList"
@@ -30,6 +35,27 @@ div#piaoModal
           )
             div.cardtxt
               b 金额：
-              span ￥{{ piao.remainder }}
-            p 票友卡：{{ piao.denomination }}元
+              span ￥{{ piao.remainder/100 }}
+            p 票友卡：{{ piao.denomination/100 }}元
             p 有效期：{{ piao.startTime }}至{{ piao.endTime }}
+
+div.maskother.flex#addCard
+  div.regist.m-hide
+    header
+      p 票友卡绑定
+    ul.registbox.determine.cardbind
+      li.flexbox_v_c
+        input(type='tel',name='cardnum',placeholder='请输入票友卡号').flex.biginput
+      li.flexbox_v_c
+        input(type='password',name='pwd',placeholder='请输入票友密码').flex.biginput
+      li.flexbox_v_c
+        input(type='tel',name='mobile',placeholder='请输入手机号').flex.biginput
+      li.flexbox_v_c.testcode
+        input(type='tel',name='code',placeholder='请输入验证码').flex.biginput
+        img(src='')#changeImg
+        span.codechange(v-on:click="changeCode()") 换一张
+      li.flexbox_v_c.cardused
+        p 票友卡可用于购票支付使用，请注意在有效期内使用。
+      li.flexbox_v_c.bindcheck 状态
+    div.flexbox
+      input(type='button',value='立即绑定').btn_regist.btn_determine.flex(v-on:click="bindCard()")

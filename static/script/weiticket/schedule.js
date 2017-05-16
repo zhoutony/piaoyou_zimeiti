@@ -42,7 +42,7 @@ $(document).ready(function() {
             url = '/' + publicsignal + '/one_movie_schedule/1/' + cinema.cinemaID + '/' + movieId;
         moviescrollLi.removeClass('curr');
         _el.addClass('curr');
-        filmtxt.find('p').html(_el.data('intro'));
+        filmtxt.find('p').html(_el.data('moviename'));
         //好友买单 邀红包  设置
         if(_el.data('isfriendspay') == 'true'){
             firendbtn.removeClass('m-hide');
@@ -117,7 +117,7 @@ $(document).ready(function() {
             if (movieId) {
                 var _movie = $('#movie-' + movieId);
                 _movie.addClass('curr');
-                filmtxt.find('p').html(_movie.data('intro'));
+                filmtxt.find('p').html(_movie.data('moviename'));
 
                 //好友买单 邀红包  设置
                 if(_movie.data('isfriendspay') == 'true'){

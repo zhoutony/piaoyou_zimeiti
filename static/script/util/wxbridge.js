@@ -1,5 +1,16 @@
 var $ = require('../lib/zepto.js');
 var wx = require('../lib/wx.js');
+var $ = require('../lib/zepto.js');
+var iScroll = require('../lib/iscroll');
+var _ = require('../lib/underscore');
+var cache = require('../util/session_cache.js');
+var cookie = require("../util/cookie.js");
+var mui = require('../lib/mui.js');
+var Util = require('../util/widgets.js');
+var wxbridge = require('../util/wxbridge');
+var dialogs = require('../util/dialogs');
+// var Citys = require('./citys');
+var ChooseCity = require('../util/chooseCity');
 var index = 0;
 //验证签名
 function wx_verif(force,debug){
@@ -127,12 +138,118 @@ function share(param){
     });
 }
 
+// 获取当前位址
+    var _chooseCity = $('#chooseCity'),
+        cityEl,
+        city = cookie.getItem('city'),
+        locationId;
+    var openId = cookie.getItem('openids');
+    if(city){
+        city = JSON.parse(city);
+        _chooseCity.find('span').html(city.name);
+        locationId = city.locationId;
+    }
+    function wxGetPosition (latitudes,longitudes) {
+
+            // 设置时效为30天的坐标信息
+                    cookie.setItem(
+                        'currentCoords',
+                        JSON.stringify({
+                            latitude: latitudes,
+                            longitude: longitudes
+                        }),
+                        60 * 60 * 24 * 30, '/');
+
+            $.get('/queryLocation/' + longitudes + '/' + latitudes, function(renderData){
+                if(renderData && renderData.location){
+                    var location = renderData.location;
+
+                    // 如果页面已经是当前城市的, 就不处理了
+                    if ((locationId || 110100) === location.locationID) {
+                        if (location.locationID === 110100) {
+                            setCity({
+                                locationId: location.locationID,
+                                name: location.nameCN
+                            }, true);
+                        }
+
+                        return;
+                    }
+
+                    var message = _.template('<p>当前定位您在 <%= city%>，是否切换？</p>')({
+                        city: location.nameCN
+                    });
+
+                    dialogs.confirm(message, function () {
+                        setCity({
+                            locationId: location.locationID,
+                            name: location.nameCN
+                        });
+                    });
+                }
+            });
+        
+    }
+
+    // 设置城市
+    function setCity(city, dontRedirect) {
+        // 设置 Cookie
+        var cookieExpired = 60 * 60 * 24 * 30; //30天
+        var cookiePath = '/';
+        cookie.setItem('city', JSON.stringify(city), cookieExpired, cookiePath);
+
+        if (dontRedirect) {
+            return;
+        }
+
+        // 跳转页面
+        
+        if(window.location.href.indexOf('ticket') != -1){
+            
+            if (window.location.href.indexOf('ticket_activity') != -1) {
+                    var _activity = JSON.parse(cookie.getItem('activity')).activityID;
+                    var _from = JSON.parse(cookie.getItem('activity')).from;
+                    location.href = '/'+ window.publicsignal + '/' + city.locationId + '/ticket_activity/' + _activity+'/'+_from;
+                }
+                else{
+                    location.href = '/'+ window.publicsignal + '/' + city.locationId + '/ticket/' + movieId;
+                }
+        }
+        else{
+            var subPage = '/filmlist/hot';
+            var activity_number = Math.random();
+            location.href = '/'+ window.publicsignal + '/' + city.locationId + subPage + '?' + activity_number;
+        }
+    }
+
+
+//定位
+function getLocation(){
+   
+   
+    wx.ready(function(res){
+        
+        //获取地理位置接口
+        wx.getLocation({
+            type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+            success: function (res) {
+                var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+                var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+                var speed = res.speed; // 速度，以米/每秒计
+                var accuracy = res.accuracy; // 位置精度
+               wxGetPosition(latitude,longitude);
+            }
+        });
+    });
+}
+
 wx_verif(0, false);
 
 var WxBridge = {
 
     auth: wx_verif,
-    share: share
+    share: share,
+    getLocation: getLocation
 
 }
 module.exports = WxBridge;

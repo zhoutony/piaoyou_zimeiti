@@ -12,11 +12,11 @@ const CardPacketListModal = ({ cardPacketList, onSelect, onClose }) => {
           return (
             <li
               className={styles.item}
-              onClick={() => onSelect(cardPacket.piaoyouCardID, cardPacket.remainder)}>
+              onClick={() => onSelect(cardPacket.piaoyouCardID, cardPacket.remainder/100)}>
               <h3>
-                金额：<span>￥{cardPacket.remainder}</span>
+                金额：<span>￥{cardPacket.remainder/100}</span>
               </h3>
-              <p>票友卡：{cardPacket.denomination}元</p>
+              <p>票友卡：{cardPacket.denomination/100}元</p>
               <p>有效期：{cardPacket.startTime}至{cardPacket.endTime}</p>
             </li>
           );

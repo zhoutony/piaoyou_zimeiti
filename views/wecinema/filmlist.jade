@@ -1,7 +1,7 @@
 extends ./layout
 
 block title
-  title 电影票友
+  title 
 
 block prepend body
   //- wrap
@@ -15,8 +15,8 @@ block prepend body
               | 北京市
             i.demo-icon.icon-down-open-mini
         ul.flex.flexbox#menutop
-          li.curr.flex._hot(data-type="hot") 正在上映
-          li.flex._coming(data-type="coming") 即将上映
+          li.curr.flex._hot._hoting(data-type="hot") 正在上映
+          //- li.flex._coming(data-type="coming") 即将上映
 
     section.movielist.flex
       div.addimg.fmaddimg
@@ -91,3 +91,4 @@ block prepend script
     | var shareInfo = !{JSON.stringify(data.shareInfo)};
   script(src="#{assets.common.js}")
   script(src="#{assets.filmlist.js}")
+  script(src="#{assets.getTitle.js}")

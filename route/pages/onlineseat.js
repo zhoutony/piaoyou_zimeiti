@@ -13,6 +13,11 @@ app.get(['/room/:showtimeId', '/:publicsignal/room/:showtimeId'], chk_login.isLo
   var showtimeId = req.params['showtimeId'];
   var publicsignal = req.params['publicsignal'];
   var open_id = req.cookies.openids || '';
+  
+  if(req.cookies.activity){
+    var activityId = JSON.parse(req.cookies.activity).activityID;
+    var from = JSON.parse(req.cookies.activity).from;
+  }
   if (!publicsignal) {
     publicsignal = constant.str.PUBLICSIGNAL;
   }
@@ -24,6 +29,11 @@ app.get(['/room/:showtimeId', '/:publicsignal/room/:showtimeId'], chk_login.isLo
     }
   };
 
+  if(req.cookies.activity){
+    options.args.activityID = activityId;
+    options.args.from = from;
+  }
+
   renderData.data = {};
   renderData.data = {
     reversion: global.reversion,
@@ -31,7 +41,7 @@ app.get(['/room/:showtimeId', '/:publicsignal/room/:showtimeId'], chk_login.isLo
   };
 
   model.fetchDataFromBack(options, function(err, data) {
-    // console.log(data)
+    
     renderData.data.err = err;
     if (!err && data && data.seats) {
       renderData.data = data;
@@ -49,11 +59,20 @@ app.get(['/room/:showtimeId', '/:publicsignal/room/:showtimeId'], chk_login.isLo
 });
 
 app.post(['/lockseats/:showtimeId'], function(req, res) {
+
+  if(req.cookies.activity){
+    var activityId = JSON.parse(req.cookies.activity).activityID;
+    var from = JSON.parse(req.cookies.activity).from;
+  }
   var options = {
     url: '/lockSeats.aspx',
     passType: 'send',
-    args: req.body
+    args: req.body,
   };
+  if(req.cookies.activity){
+    options.args.activityID = activityId;
+    options.args.from = from;
+  }
 
   options.args.openId = req.cookies.openids || '';
   model.fetchDataFromBack(options, function(err, data) {

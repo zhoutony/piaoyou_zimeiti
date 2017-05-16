@@ -160,19 +160,26 @@ export function loadNews(newsId) {
 }
 
 // 支付订单
-export function getPayParam(channel, orderId, redPacketId, cardPacketId, wxChannel) {
+export function getPayParam(channel, orderId, redPacketId, cardPacketId, codePacketId, wxChannel) {
   return {
     orderId,
     channel,
     [types.CALL_API]: {
       types: [types.GET_PAY_PARAM_REQUEST, types.GET_PAY_PARAM_SUCCESS, types.GET_PAY_PARAM_FAILURE],
-      endpoint: channel === 'weixin' ? 'QueryWeixinPlayParam.aspx' : 'HuaFeiGou.aspx',
+      // endpoint: channel === 'direct' ? 'PiaoyouCardPay.aspx' : ((channel === 'weixin') ? 'QueryWeixinPlayParam.aspx' : 'HuaFeiGou.aspx'),
+      endpoint: function(){
+        if (channel === 'direct') { return  'PiaoyouCardPay.aspx'}
+        else if (channel === 'weixin') { return  'QueryWeixinPlayParam.aspx' }
+        else if (channel === 'aLipay') { return  'Alipay.aspx' }
+        else { return  'HuaFeiGou.aspx' }
+      },
       params: {
         orderID: orderId,
         openID: cookies.get('openids') || '',
         wxtype: wxChannel,
         redEnvelopeID: redPacketId || '',
         piaoyouCardID: cardPacketId || '',
+        eTicketId: codePacketId || '',
       },
     },
   };

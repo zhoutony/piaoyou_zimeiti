@@ -146,7 +146,33 @@ $(document).ready(function() {
 	function Loading(_container, delay){
 		var html = '', tipObj = {}, container = _container ? _container : body, _el, tipTimeout;
 
-		_el = $('<div class="mask flexbox_v wait"><div class="waitbox"></div></div>').css({ zIndex: requestZIndex()+20, opacity: 0 }).appendTo(container);
+		_el = $('<div class="mask flexbox_v wait"><p class="_locking">努力加载中</p><div class="waitbox"></div></div>').css({ zIndex: requestZIndex()+20, opacity: 0 }).appendTo(container);
+		setTimeout(function(){
+			_el.addClass('m-show').css({opacity: 1});
+		}, 20);
+		
+
+		return function (options) {
+			// _el.css({opacity: 0});
+			
+			if(options){
+				_el.remove();
+			}else{
+				delay = delay || 2e3;
+				tipTimeout = setTimeout(function () {
+					_el.css({opacity: 0});
+					setTimeout(function(){
+						_el.remove();
+					}, 500)
+				}, delay);
+			}
+		};
+	}
+
+	function Loading2(_container, delay){
+		var html = '', tipObj = {}, container = _container ? _container : body, _el, tipTimeout;
+
+		_el = $('<div class="mask flexbox_v wait"><p class="_locking">锁座中...</p><div class="waitbox"></div></div>').css({ zIndex: requestZIndex()+20, opacity: 0 }).appendTo(container);
 		setTimeout(function(){
 			_el.addClass('m-show').css({opacity: 1});
 		}, 20);
@@ -242,6 +268,7 @@ $(document).ready(function() {
 	exports.pop   = pop;
 	exports.alert = alert;
 	exports.Loading = Loading;
+	exports.Loading2 = Loading2;
 	exports.shareTip = shareTip;
 	exports.confirm = confirm;
 	window.piaoyouGuide = piaoyouGuide;
