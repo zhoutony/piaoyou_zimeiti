@@ -1,0 +1,60 @@
+mixin detail
+  dl.redinfo(v-if="redBag")
+
+
+//- 微信内绑定登录流程
+div.maskother.flex#addPhone
+  div.regist
+    header
+      p 手机号绑定
+    ul.registbox.determine.cardbind
+      li.flexbox_v_c
+        input(type='tel',name='mobile',placeholder='请输入手机号').flex.biginput#input_phone
+    div.flexbox
+      input(type='button',value='下一步').btn_regist.btn_determine.flex(v-on:click="showBind()")
+
+
+div.maskother.flex#bindTel.m-hide
+  div.checkState 该手机号未注册，请注册
+  div.regist.regist_bind
+    header
+      p 电影票友注册
+    ul.registbox.determine.cardbind
+      li.flexbox_v_c.tel_name
+        input(type='tel',name='bindNum',placeholder='').flex.biginput
+        i.iconfont.ficon-cuowu(v-on:click="empty_tel()")
+      li.flexbox_v_c.code_left.code_name
+        input(type='text',name='bindCode',placeholder='').flex.biginput
+      li.flexbox_v_c.code_right
+        input(type='text',name='',placeholder='',value='发送验证码',readonly,v-on:click="send_message()").flex.biginput.sendMessage
+      li.flexbox_v_c.pwd_name
+        input(type='password',name='bindPwd',placeholder='6-20位').flex.biginput.hidePwd 
+        input(type='text',name='bindPwd',placeholder='6-20位').flex.biginput.showPwd.f-hide
+        i.iconfont.ficon-yanjing(v-on:click="change_pwd()")
+      li.flexbox_v_c.bindcheck 状态
+    div.flexbox
+      input(type='button',value='注册并绑定').btn_regist.btn_determine.flex(v-on:click="bindCard()")
+
+div.maskother.flex#syncing.m-hide
+  div.regist
+    header
+      p 同步数据
+    div.img_logo
+    div.syncing 正在同步
+    div.img_tel
+
+//- 微信外绑定登录流程
+
+//- div.maskother.flex#addCode
+//-   div.regist
+//-     header
+//-       p 电影票友登录
+//-     ul.registbox.determine.cardbind
+//-       li.flexbox_v_c.tel_name
+//-         input(type='tel',name='',placeholder='').flex.biginput
+//-         i.iconfont.ficon-cuowu
+//-       li.flexbox_v_c.pwd_name
+//-         input(type='password',name='',placeholder='6-20位').flex.biginput
+//-         i.iconfont.ficon-yanjing
+//-     div.flexbox
+//-       input(type='button',value='登录').btn_regist.btn_determine.flex(v-on:click="bindCard()")

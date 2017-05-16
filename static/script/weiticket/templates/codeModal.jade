@@ -1,0 +1,98 @@
+mixin detail
+  dl.redinfo(v-if="redBag")
+    dt 兑换码使用规则
+    dd
+    h2 兑换码
+    ul(style="border-bottom:0")
+      li 兑换码：{{ redBag.code }}
+    h2 使用范围
+    ul
+      li 影片：{{ redBag.movieName }}
+      li 有效期：{{ redBag.endTime }}
+      li 版本：{{ redBag.type }}
+      li 兑换限价：{{ redBag.limitPrice }}
+      li 影院：{{ redBag.cinema }}
+      li 使用城市：全国
+      li 说明：{{ redBag.desc }}
+    h2 使用规则
+    ol
+      li 仅限在电影票友 购票平台使用
+      li *使用流程
+      li 1，进入电影票友购票页
+      li 2，选择城市
+      li 3，选择影片->选择影院->选择场次->选择座位
+      li 4，输入手机号->确认
+      li 5，进入支付页->选择可用的兑换码->确认支付
+      li 6，订票成功后将收到短信，凭短信到影院换取电影票观影
+    a.btn_back(v-on:click="showList()") 返回
+
+div#codeBag
+  +detail
+  div.orderbox(v-else)
+    dt
+      a(v-on:click="showCard()")
+        | 兑换码
+    dd
+      div.cardpop
+        nav
+          ul.flexbox
+            li.flex(
+              v-bind:class="{curr: currentTab === 1}"
+              v-on:click="changeTab(1)"
+            )
+              未使用({{ unusedCount }})
+            li.flex(
+              v-bind:class="{curr: currentTab === 3}"
+              v-on:click="changeTab(3)"
+            )
+              已过期({{ expiredCount }})
+            li.flex(
+              v-bind:class="{curr: currentTab === 2}"
+              v-on:click="changeTab(2)"
+            )
+              已使用({{ usedCount }})
+        ul.cardmid(v-show="!hasNoRedBag")
+          li(
+            v-for="redBag in redBagList"
+            v-bind:class="{new: redBag.state == 1}"
+            v-show="redBag.state == currentTab"
+            v-on:click="showDetail(redBag.Id)"
+          )
+            div.cardlay
+              div.cardinfo.flexbox_v_c
+                div.flex.main(style="margin-top:-1.2rem")
+                  p 兑换券
+                  p 类型：{{ redBag.type }}
+                div.aside
+                  p {{ redBag.movieName }}电影票在线选座兑换券
+                  p {{ redBag.cinema }}
+                  p {{ redBag.limitPrice }}
+            div.cardend.flexbox
+              div.flex.main 只能在本平台使用
+              div.aside {{ redBag.expiredTime }}到期
+                span(v-if="redBag.remainTime") （仅剩 {{ redBag.remainTime }}）
+        div.redempty(v-show="hasNoRedBag")
+          p
+            i
+            | 还没有兑换码哦
+
+div.maskother.flex#addCode
+  div.regist.m-hide
+    header
+      p 兑换码绑定
+    ul.registbox.determine.cardbind
+      li.flexbox_v_c
+        input(type='text',name='codenum',placeholder='请输入兑换码',maxlength='12').flex.biginput
+      //- li.flexbox_v_c
+      //-   input(type='password',name='pwd',placeholder='请输入票友密码').flex.biginput
+      li.flexbox_v_c
+        input(type='tel',name='mobile',placeholder='请输入手机号').flex.biginput
+      //- li.flexbox_v_c.testcode
+      //-   input(type='tel',name='code',placeholder='请输入验证码').flex.biginput
+        img(src='')#changeImg
+        span.codechange(v-on:click="changeCode()") 换一张
+      li.flexbox_v_c.cardused
+        p 兑换码可用于购票支付使用，请注意在有效期内使用。
+      li.flexbox_v_c.bindcheck 状态
+    div.flexbox
+      input(type='button',value='立即绑定').btn_regist.btn_determine.flex(v-on:click="bindCard()")

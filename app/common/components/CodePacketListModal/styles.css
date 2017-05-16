@@ -1,0 +1,125 @@
+.list {}
+
+.item {
+  margin-top: .83rem;
+  padding: .83rem 0 .42rem 1rem;
+  background: url(./item.png) center top no-repeat #fff;
+  background-size: auto 1.25rem;
+  position: relative;
+}
+
+.item::after {
+  content: '';
+  position: absolute;
+  width: 6.67rem;
+  height: 6.67rem;
+  right: .83rem;
+  top: .83rem;
+  background: url(./quan.png) center center no-repeat;
+  background-size: cover;
+}
+
+.available {
+  background-image: url(./available-item.png);
+}
+
+.info {
+  margin-right: .42rem;
+  padding: 0 .42rem;
+  background: url(./arrow.png) right center no-repeat;
+  background-size: auto 1.9rem;
+  display: flex;
+  font-size: .75rem;
+  line-height: 2;
+  position: relative;
+  z-index: 1;
+}
+
+.available .info {
+  background-image: url(./available-arrow.png);
+}
+
+.amount {
+  flex: 1 0;
+  padding-top: 1.7rem;
+  color: #00968d;
+}
+
+.condition {
+  padding: 1.67rem .83rem .42rem;
+  color: #717171;
+}
+.condition p{
+  text-align: right;
+}
+
+.limit {
+  position: relative;
+  z-index: 1;
+  border-top: 1px dotted #707070;
+  margin: .42rem 0 0;
+  padding: .42rem .42rem 0;
+  display: flex;
+}
+
+.limit p {
+  font-size: .83rem;
+  color: #707070;
+  flex: 1 0;
+}
+
+.limit span {
+  font-size: .67rem;
+  color: #78797b;
+
+}
+
+.strong {
+    position: absolute;
+    margin-left: 2rem;
+    background: #ea5513;
+    color: #fff;
+    padding: .3rem 1rem;
+    top: 0;
+    right: 0;
+    display: none;
+}
+
+.strong2 {
+    position: absolute;
+    margin-left: 2rem;
+    background: #ea5513;
+    color: #fff;
+    padding: .3rem 1rem;
+    top: 0;
+    right: 0;
+    display: block;
+}
+
+.strong:after {
+    background: #ea5513;
+    color: #fff;
+    content: '';
+    display: block;
+    position: absolute;
+    left: -.5rem;
+    top: 0;
+    bottom: 0;
+    width: 1rem;
+    transform: skew(20deg, 0deg);
+}
+
+.checkCode{
+    height: 3rem;
+    line-height: 3rem;
+    background: #00978a;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #fff;
+    margin-top: 2rem;
+}
+
+.idNone{
+  display: none;
+}
+
