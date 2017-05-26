@@ -43,6 +43,6 @@ app.use(function(err, req, res, next) {
 require('./route');
 require('./app/server');
 
-var server = app.listen(80, function() {
+var server = app.listen(3001, function() {
   console.log('Listening on port %d', server.address().port);
 });

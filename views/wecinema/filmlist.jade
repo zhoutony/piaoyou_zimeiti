@@ -56,10 +56,10 @@ block prepend body
                 span.minPrice #{(movie.MinPrice/100).toFixed(2)}
     div.navtool
       ul.flexbox
-        li.flex
-          a(href="/")
-            i.n01
-            | 推荐
+        //- li.flex
+        //-   a(href="/#{data.publicsignal}")
+        //-     i.n01
+        //-     | 推荐
         li.flex.newflex.curr
           a(href="javascript:;")
             i.n02
@@ -67,13 +67,13 @@ block prepend body
         li._piaoyouguide
           a
             i.nadd
-        li.flex.newflex
-          //- .showtips
-          //- a(href="javascript:;")#findbox
-          a(href="/#{data.publicsignal}/movies")
-            i.n03
-            | 电影
-            div.navtips
+        //- li.flex.newflex
+        //-   //- .showtips
+        //-   //- a(href="javascript:;")#findbox
+        //-   a(href="/#{data.publicsignal}/movies")
+        //-     i.n03
+        //-     | 电影
+        //-     div.navtips
         li.flex
           a(href="/#{data.publicsignal}/my/index")
             i.n04

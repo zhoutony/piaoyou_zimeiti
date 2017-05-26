@@ -6,7 +6,7 @@ import styles from './styles.css';
 const BottomNav = ({ current, wxChannel }) => {
   const cityId = JSON.parse(cookies.get('city') || '{"locationId": 110100}').locationId;
   const items = [
-    { id: 'home', label: '推荐', url: '/' },
+    { id: 'home', label: '推荐', url: `/${wxChannel}` },
     { id: 'ticket', label: '购票', url: `/${wxChannel}/${cityId}/filmlist/hot` },
     { id: 'movies', label: '电影', url: `/${wxChannel}/movies` },
     { id: 'my', label: '我的', url: `/${wxChannel}/my/index` },

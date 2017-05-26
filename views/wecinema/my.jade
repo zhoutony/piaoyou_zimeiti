@@ -93,10 +93,10 @@ block prepend body
       //-     p 电影票友服务由北京亚视联合在线科技有限公司提供
   div.navtool
     ul.flexbox
-      li.flex
-        a(href="/")
-          i.n01
-          | 推荐
+      //- li.flex
+      //-   a(href="/#{data.publicsignal}")
+      //-     i.n01
+      //-     | 推荐
       li.flex
         a(href="/#{data.publicsignal}/#{data.locationId}/filmlist/hot")
           i.n02
@@ -104,12 +104,12 @@ block prepend body
       li._piaoyouguide
         a
           i.nadd
-      li.flex.newflex
-        //.showtips
-        a(href="/#{data.publicsignal}/movies")
-          i.n03
-          | 电影
-          div.navtips
+      //- li.flex.newflex
+      //-   //.showtips
+      //-   a(href="/#{data.publicsignal}/movies")
+      //-     i.n03
+      //-     | 电影
+      //-     div.navtips
       li.flex.curr
         a(href="javascript:;")
           i.n04
@@ -120,3 +120,4 @@ block prepend footer
 block prepend script
   script(src="#{assets.common.js}")
   script(src="#{assets.mine.js}")
+  script(src="#{assets.getTitle.js}")
